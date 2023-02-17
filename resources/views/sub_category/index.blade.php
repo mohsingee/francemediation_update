@@ -3,7 +3,12 @@
 <!-- Responsive Table -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
-        <h5 class="card-header">Responsive Table</h5>
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+            <div class="daterange-container">
+                <a data-toggle="tooltip" class="btn btn-primary btn-sm btn-create"
+                    href="{{ route('sub_categories.create') }}"><i class="icon-plus"></i> Add Sub Category</a>
+            </div>
+        </div>
         @if (session()->has('success'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span

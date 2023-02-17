@@ -3,6 +3,12 @@
 <!-- Responsive Table -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+            <div class="daterange-container">
+                <a data-toggle="tooltip" class="btn btn-primary btn-sm btn-create"
+                    href="{{ route('blogs.create') }}"><i class="icon-plus"></i> Add Blog</a>
+            </div>
+        </div>
         <h5 class="card-header">Responsive Table</h5>
         @if (session()->has('success'))
             <div class="alert alert-success">

@@ -18,43 +18,43 @@
                 <div class="row gutters">
                     <div class="col-8">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Blog Title</label>
+                            <label class="form-label" for="exampleFormControlInput1">Blog Title</label>
                             <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Enter title...">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Blog Author</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Blog Author</label>
                             <input type="text" name="author" class="form-control" placeholder="Enter author name">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Thumbnail Image</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Thumbnail Image</label>
                             <input type="file" name="thumbnail_img" class="form-control" placeholder="Enter author name">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Banner Image</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Banner Image</label>
                             <input type="file" name="banner_img" class="form-control" placeholder="Enter author name">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Detail Image</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Detail Image</label>
                             <input type="file" name="detail_img" class="form-control" placeholder="Enter author name">
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Short Description</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Short Description</label>
                             <textarea class="form-control" name="short_description" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Long Description</label>
+                            <label class="form-label" for="exampleFormControlTextarea1">Long Description</label>
                             <textarea class="form-control" name="long_description" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </div>

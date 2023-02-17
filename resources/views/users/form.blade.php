@@ -28,17 +28,16 @@
                                     <div class="row gutters" id="selectedImage">
                                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6">
                                             @if ($user->image != '')
-                                                <a href="{{ asset('assets/images/' . $user->image) }}" style="width: 186px; height: 186px;">
+                                                <a href="{{ asset('assets/images/' . $user->image) }}" >
                                                     <img src="{{ asset('assets/images/' . $user->image) }}"
-                                                        class="img-responsive">
+                                                        class="img-responsive" width="90">
                                                     <div class="overlay">
                                                         <span class="expand">+</span>
                                                     </div>
                                                 </a>
                                             @else
-                                            
                                                 <a href="{{ asset('assets/images/user.png') }}">
-                                                    <img src="{{ asset('assets/images/user.png') }}" class="img-responsive" />
+                                                    <img src="{{ asset('assets/images/user.png') }}" class="img-responsive" width="90"/>
                                                     <div class="overlay">
                                                         <span class="expand">+</span>
                                                     </div>
@@ -64,35 +63,35 @@
                                 value="{{ isset($user->lastname) ? $user->lastname : '' }}" />
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
                         <div class="form-group">
                             <input type="text" class="form-control" id="username" name="username"
                                 placeholder="Username *"
                                 value="{{ isset($user->username) ? $user->username : '' }}" />
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Email Address *"
                                 value="{{ isset($user->email) ? $user->email : '' }}" />
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" value="{{ isset($user->image) ? $user->image : '' }}" id="image" name="image" />
                             <label class="custom-file-label custom-file-label-primary" for="image">Choose
                                 profile Image</label>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
                         <div class="form-group">
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Password" />
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
+                        <div class="form-group"
                             <input type="password" class="form-control" id="password_confirmation"
                                 name="password_confirmation" placeholder="Confirm Password" />
                         </div>
@@ -100,6 +99,7 @@
                 </div>
                         <div id="formmodel">
             		</div>
+                    <br>
                 <div class="actions clearfix">
                     <button type="submit" class="btn btn-primary"><span class="icon-save2"></span>
                         @if ($result['method'] == 'add')
