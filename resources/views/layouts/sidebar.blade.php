@@ -50,11 +50,42 @@
         </a>
       </li>
       <!-- Instructor -->
-      <li class="menu-item {{ Route::is('instructor.index') ? 'active' : '' }}">
-        <a href="{{ route('instructor.index') }}" class="menu-link">
-          <i class='menu-icon tf-icons bx bx-detail'></i>
-          <div data-i18n="Analytics">Instructor</div>
+      <li class="menu-item @if(Route::is('instructor.index')) active @elseif(Route::is('instructor.create')) active @endif">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-detail"></i>
+          <div data-i18n="Account Settings">Manage Instructors</div>
         </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('instructor.index') }}" class="menu-link">
+              <div data-i18n="Account">All Instructor</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('instructor.create') }}" class="menu-link">
+              <div data-i18n="Notifications">Add Instructor</div>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- Student -->
+      <li class="menu-item @if(Route::is('students.index')) active @elseif(Route::is('students.create')) active @endif">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="Account Settings">Manage Students</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('students.index') }}" class="menu-link">
+              <div data-i18n="Account">All Student</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('students.create') }}" class="menu-link">
+              <div data-i18n="Notifications">Add Student</div>
+            </a>
+          </li>
+        </ul>
       </li>
       <!-- Categories -->
       <li class="menu-item">
@@ -76,11 +107,23 @@
         </ul>
       </li>
       <!-- Courses -->
-      <li class="menu-item {{ Route::is('courses.index') ? 'active' : '' }}">
-        <a href="{{ route('courses.index') }}" class="menu-link">
-          <i class='menu-icon tf-icons bx bx-detail'></i>
-          <div data-i18n="Analytics">Courses</div>
+      <li class="menu-item @if(Route::is('courses.index')) active @elseif(Route::is('courses.create')) active @endif">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-detail"></i>
+          <div data-i18n="Account Settings">Manage Courses</div>
         </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('courses.index') }}" class="menu-link">
+              <div data-i18n="Account">All Course</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('courses.create') }}" class="menu-link">
+              <div data-i18n="Notifications">Add Course</div>
+            </a>
+          </li>
+        </ul>
       </li>
       <!-- Events -->
       <li class="menu-item {{ Route::is('events.index') ? 'active' : '' }}">

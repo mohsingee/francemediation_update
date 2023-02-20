@@ -16,6 +16,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,6 +123,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('instructor', InstructorController::class);
     Route::get('instructor/delete/{id}', [InstructorController::class, 'delete'])->name('instructor.delete');
     Route::post('/instructor/deleteAll', [InstructorController::class, 'deleteAll'])->name('instructor.delete-all');
+    
+    Route::resource('students', StudentController::class);
+    Route::get('students/delete/{id}', [StudentController::class, 'delete'])->name('students.delete');
+    Route::post('/students/deleteAll', [StudentController::class, 'deleteAll'])->name('students.delete-all');
     
     Route::resource('events', EventController::class);
     Route::get('events/delete/{id}', [EventController::class, 'delete'])->name('events.delete');
