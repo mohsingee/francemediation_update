@@ -119,11 +119,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('courses', CoursesController::class);
     Route::get('courses/delete/{id}', [CoursesController::class, 'delete'])->name('courses.delete');
     Route::post('/courses/deleteAll', [CoursesController::class, 'deleteAll'])->name('courses.delete-all');
+    Route::get('get-sub-category/{id}', [CoursesController::class, 'getSubCategory'])->name('get-sub-category');
 
     Route::resource('instructor', InstructorController::class);
     Route::get('instructor/delete/{id}', [InstructorController::class, 'delete'])->name('instructor.delete');
     Route::post('/instructor/deleteAll', [InstructorController::class, 'deleteAll'])->name('instructor.delete-all');
-    
+   
     Route::resource('students', StudentController::class);
     Route::get('students/delete/{id}', [StudentController::class, 'delete'])->name('students.delete');
     Route::post('/students/deleteAll', [StudentController::class, 'deleteAll'])->name('students.delete-all');

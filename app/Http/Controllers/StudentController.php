@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Student;
+use Illuminate\Support\Facades\File;
 class StudentController extends Controller
 {
     /**
@@ -122,7 +123,48 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required',
+            'password' => 'required',
+            'profile' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+        ]);
+        $student = Student::where('id',$id)->first();
+        if($request->profile){
+            $isExists = File::exists('assets/students/'.$student->profile);
+            if ($isExists == true) {
+                File::delete(public_path('assets/students/' . $student->profile));
+            }
+            $p_img = time() . rand(1, 99999). "." . $request->profile->getClientOriginalExtension();
+            $request->profile->move(public_path('assets/students/'),$p_img);
+        }else{
+            $p_img = $student->profile;
+        }
+
+        Student::where('id',$id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'area_code' => $request->area_code,
+            'profile' => $p_img,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code,
+            'gender' => $request->gender,
+            'about_student' => $request->about_student,
+        ]);
+
+        $response_date = [
+            'status' => true,
+            'msg' => 'Profile updated successfully'
+        ];
+
+        return redirect(route('students.index', $response_date));
     }
 
     /**

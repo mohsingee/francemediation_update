@@ -1,53 +1,50 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <form action="{{ route('sub_categories.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if ($errors->any())
-            <div class="validation error">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true" id="cross">×</span></button>
-                <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}<br />
-                @endforeach
-            </div>
-        @endif
-        <div class="card">
-            <div class="card-body">
-                <div class="row gutters">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
-                            <select name="category_id" id="" class="form-control">
-                                <option disabled selected>Select Category</option>
-                                @foreach($category as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlInput1">Title</label>
-                            <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Enter title...">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Image</label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                    </div>
+    <div class="card mb-4">
+        <h5 class="card-header">Sub Category Details</h5>
+        <div class="card-body">
+            <form action="{{ route('sub_categories.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br />
+                    @endforeach
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <br>
-                <div class="actions clearfix">
-                    <button type="submit" class="btn btn-primary"><span class="icon-save2"></span>
-                            Save
-                    </button>
-                </div>
+            @endif
+            <div class="row">
+              <div class="mb-3 col-md-12">
+                <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
+                <select name="category_id" id="" class="form-control">
+                    <option disabled selected>Select Category</option>
+                    @foreach($category as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="title" class="form-label">Category Title</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Enter title..."
+                  autofocus
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="image" class="form-label">Category Image</label>
+                <input class="form-control" type="file" name="image" id="image"/>
+              </div>
             </div>
+            <div class="mt-2">
+            <button type="submit" class="btn btn-primary me-2">Save</button>
+            </div>
+          </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

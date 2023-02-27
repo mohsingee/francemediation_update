@@ -24,9 +24,6 @@ class CreateInstructorsTable extends Migration
             $table->string('phone_number');
             $table->text('address');
             $table->string('postal_code');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
             $table->string('gender');
             $table->text('facebook');
             $table->text('twitter');

@@ -7,6 +7,7 @@
 <script src="{{ asset('assets/admin/js/main.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dashboards-analytics.js') }}"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!-- Data Tables JS -->
 <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables/dataTables.bs4.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables/dataTables.bs4-custom.css')}}" />

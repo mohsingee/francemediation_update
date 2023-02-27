@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Instructor;
+use Illuminate\Support\Facades\File;
 
 class InstructorController extends Controller
 {

@@ -1,81 +1,72 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <form action="{{ route('blogs.update',$blog->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('put')
-        @if ($errors->any())
-            <div class="validation error">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true" id="cross">×</span></button>
-                <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}<br />
-                @endforeach
+    <div class="card mb-4">
+        <h5 class="card-header">Edit Blog Detail</h5>
+        <div class="card-body">
+            <form action="{{ route('blogs.update',$blog->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br />
+                    @endforeach
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="title" class="form-label">Blog Title</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="title"
+                  name="title"
+                  value="{{ $blog->title }}"
+                  placeholder="Enter title..."
+                  autofocus
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="author" class="form-label">Blog Author</label>
+                <input class="form-control" value="{{ $blog->author }}" type="text" name="author" id="author" placeholder="Enter author name..."/>
+              </div>
+              <div class="mb-3 col-md-3">
+                <label for="thumbnail_img" class="form-label">Thumbnail Image</label>
+                <input class="form-control" type="file" name="thumbnail_img" id="thumbnail_img"/>
+              </div>
+              <div class="mb-3 col-md-1">
+                <img src="{{ asset('assets/blogs/'.$blog->thumbnail_img) }}" alt="" width="70" class="mt-4">
+              </div>
+              <div class="mb-3 col-md-3">
+                <label for="banner_img" class="form-label">Banner Image</label>
+                <input class="form-control" type="file" name="banner_img" id="banner_img"/>
+              </div>
+              <div class="mb-3 col-md-1">
+                <img src="{{ asset('assets/blogs/'.$blog->banner_img) }}" alt="" width="70" class="mt-4">
+              </div>
+              <div class="mb-3 col-md-3">
+                <label for="detail_img" class="form-label">Detail Image</label>
+                <input class="form-control" type="file" name="detail_img" id="detail_img"/>
+              </div>
+              <div class="mb-3 col-md-1">
+                <img src="{{ asset('assets/blogs/'.$blog->detail_img) }}" alt="" width="70" class="mt-4">
+              </div>
             </div>
-        @endif
-        <div class="card">
-            <div class="card-body">
-                <div class="row gutters">
-                    <div class="col-md-8 col-12">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlInput1">Blog Title</label>
-                            <input type="text" name="title" value="{{ $blog->title }}" class="form-control" id="exampleFormControlInput1" placeholder="Enter title...">
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Blog Author</label>
-                            <input type="text" name="author" value="{{ $blog->author }}" class="form-control" placeholder="Enter author name">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Thumbnail Image</label>
-                            <input type="file" name="thumbnail_img" class="form-control" placeholder="Enter author name">
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-6">
-                        <img src="{{ asset('assets/blogs/'.$blog->thumbnail_img) }}" alt="" width="80" class="mt-4">
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Banner Image</label>
-                            <input type="file" name="banner_img" class="form-control" placeholder="Enter author name">
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-6">
-                        <img src="{{ asset('assets/blogs/'.$blog->banner_img) }}" alt="" width="80" class="mt-4">
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Detail Image</label>
-                            <input type="file" name="detail_img" class="form-control" placeholder="Enter author name">
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-6">
-                        <img src="{{ asset('assets/blogs/'.$blog->detail_img) }}" alt="" width="80" class="mt-4">
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Short Description</label>
-                            <textarea class="form-control" name="short_description" id="exampleFormControlTextarea1" rows="3">{{ $blog->short_description }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Long Description</label>
-                            <textarea class="form-control" name="long_description" id="exampleFormControlTextarea1" rows="3">{{ $blog->long_description }}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="actions clearfix">
-                    <button type="submit" class="btn btn-primary"><span class="icon-save2"></span>
-                            Save
-                    </button>
-                </div>
-            </div></div>
-    </form>
+            <div class="mb-3 col-md-12">
+                <label for="short_description" class="form-label">Short description</label>
+                <textarea name="short_description" id="short_description" class="form-control" cols="30" rows="2" placeholder="Enter short description...">{{ $blog->short_description }}</textarea>
+            </div>
+            <div class="mb-3 col-md-12">
+                <label for="long_description" class="form-label">Long description</label>
+                <textarea name="long_description" id="long_description" class="form-control" cols="30" rows="2" placeholder="Enter long description...">{{ $blog->long_description }}</textarea>
+            </div>
+            <div class="mt-2">
+            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+            </div>
+          </form>
+        </div>
+    </div>
 </div>
 @endsection

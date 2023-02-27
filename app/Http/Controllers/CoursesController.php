@@ -116,7 +116,8 @@ class CoursesController extends Controller
         $users = Instructor::all();
         $course = CourseModel::where('id',$id)->first();
         $categories = Category::all();
-        return view('courses.edit',compact('course','users','categories'));
+        $sub_categories = SubCategory::where('category_id',$course->category)->get();
+        return view('courses.edit',compact('course','users','categories','sub_categories'));
     }
 
     /**
@@ -185,5 +186,10 @@ class CoursesController extends Controller
             $arr = ["success" => true, "message" => 'Selected course Delete successfully.'];
             return $arr;
         }
+    }
+
+    public function getSubCategory($id){
+        $data = SubCategory::where("category_id",$id)->pluck("title","id");
+        return response()->json($data);
     }
 }

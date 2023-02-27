@@ -2,21 +2,14 @@
 @section('content')
 <!-- Responsive Table -->
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card">
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
-            <div class="daterange-container">
-                <a data-toggle="tooltip" class="btn btn-primary btn-sm btn-create"
-                    href="{{ route('categories.create') }}"><i class="icon-plus"></i> Add Category</a>
-            </div>
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            {!! session()->get('success') !!}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <h5 class="card-header">Responsive Table</h5>
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true" id="cross">×</span></button>
-                {!! session()->get('success') !!}
-            </div>
-        @endif
+    @endif
+    <div class="card">
+        <h5 class="card-header">Manage Categories</h5>
         <div class="table-responsive text-nowrap">
             <table id="datatable" class="table card-table">
                 <thead>

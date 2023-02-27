@@ -1,133 +1,116 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if ($errors->any())
-            <div class="validation error">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true" id="cross">×</span></button>
-                <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}<br />
-                @endforeach
+    <div class="card mb-4">
+        <h5 class="card-header">Profile Details</h5>
+        <div class="card-body">
+            <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br />
+                    @endforeach
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="firstName"
+                  name="first_name"
+                  placeholder="Enter name..."
+                  autofocus
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input class="form-control" type="text" name="last_name" id="lastName" placeholder="Enter last name..."/>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="email" class="form-label">E-mail</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="john.doe@example.com"
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="email" class="form-label">Password</label>
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter password..."
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="email" class="form-label">Area Code</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="area_code"
+                  name="area_code"
+                  placeholder="Enter area code..."
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label class="form-label" for="phoneNumber">Phone Number</label>
+                <div class="input-group input-group-merge">
+                  <input
+                    type="number"
+                    id="phone_number"
+                    name="phone_number"
+                    class="form-control"
+                    placeholder="Enter phone number..."
+                  />
+                </div>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="postal_code" class="form-label">Postal Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="postal_code"
+                  name="postal_code"
+                  placeholder="231465"
+                  maxlength="6"
+                />
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="gender" class="form-label">Gender</label>
+                <select id="gender" name="gender" class="select2 form-select">
+                  <option selected disabled>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="profile" class="form-label">Profile</label>
+                <input type="file" class="form-control" id="profile" name="profile">
+              </div>
             </div>
-        @endif
-        <div class="card">
-            <div class="card-body">
-                <div class="row gutters">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlInput1">First Name</label>
-                            <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1" placeholder="Enter first name">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" placeholder="Enter last name">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Enter email">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Enter password">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Area Code</label>
-                            <input type="text" name="area_code" class="form-control" placeholder="Enter area code">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Phone Number</label>
-                            <input type="number" name="phone_number" class="form-control" placeholder="Enter phone number">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Address</label>
-                            <input type="text" name="address" class="form-control" placeholder="Enter address">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Postal Code</label>
-                            <input type="text" name="postal_code" class="form-control" placeholder="Enter postal code">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Country</label>
-                            <select name="country" id="" class="form-control">
-                                <option value="Pak">Pakistan</option>
-                                <option value="Ind">India</option>
-                                <option value="Usa">America</option>
-                                <option value="Fr">France</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">State</label>
-                            <select name="state" id="" class="form-control">
-                                <option value="punjab">Punjab</option>
-                                <option value="kpk">KPK</option>
-                                <option value="balochistan">Balochistan</option>
-                                <option value="sindh">Sindh</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">City</label>
-                            <select name="city" id="" class="form-control">
-                                <option value="lahore">Lahore</option>
-                                <option value="islamabad">Islamabad</option>
-                                <option value="faislabad">Faislabad</option>
-                                <option value="karachi">Karachi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Gender</label>
-                            <select name="gender" id="" class="form-control">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">About Student</label>
-                            <textarea class="form-control" name="about_student" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleFormControlTextarea1">Profile</label>
-                            <input type="file" class="form-control" name="profile">
-                        </div>
-                    </div>
-                    
-                </div>
-                <br>
-                <div class="actions clearfix">
-                    <button type="submit" class="btn btn-primary"><span class="icon-save2"></span>
-                            Save
-                    </button>
-                </div>
-            </div></div>
-    </form>
+            <div class="mb-3 col-md-12">
+                <label for="about_student" class="form-label">About Student</label>
+                <textarea name="about_student" id="about_student" class="form-control" cols="30" rows="2" placeholder="About student..."></textarea>
+            </div>
+            <div class="mt-2">
+              <button type="submit" class="btn btn-primary me-2">Save</button>
+              <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+    </div>
 </div>
 @endsection
