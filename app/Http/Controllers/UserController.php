@@ -31,7 +31,7 @@ class UserController extends Controller
                 ->addColumn('mergeColumn', function ($row3) {
                     if($row3->image == ''){
                         $image = '<span class="avatar avatar-img list-img">
-                        <img src="'.asset('assets/images/user.png').'" /></span>';
+                        <img src="'.asset('assets/images/user.png').'" width="60"/></span>';
                     }
                     else
                     {

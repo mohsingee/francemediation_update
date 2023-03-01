@@ -9,7 +9,7 @@
         </div>
     @endif
     <div class="card">
-        <h5 class="card-header">Manage Students</h5>
+        <h5 class="card-header">Selected Course</h5>
         <div class="table-responsive text-nowrap">
             <table id="datatable" class="table card-table">
                 <thead>
@@ -20,9 +20,8 @@
                                 <label class="custom-control-label" for="checkalluser"></label>
                             </div>
                         </th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
+                        <th>Title</th>
+                        <th>price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -41,7 +40,7 @@
         var table = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('students.index') }}",
+            ajax: "{{ route('user-course.index') }}",
             columns: [{
                     data: 'check',
                     name: 'check',
@@ -49,16 +48,12 @@
                     searchable: false
                 },
                 {
-                    data: 'first_name',
-                    name: 'first_name'
+                    data: 'title',
+                    name: 'title'
                 },
                 {
-                    data: 'last_name',
-                    name: 'last_name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
+                    data: 'price',
+                    name: 'price'
                 },
                 {
                     data: 'action',
@@ -97,7 +92,7 @@
                 var check = confirm("Are you sure you want to delete this row?");
                 if (check == true) {
                     $.ajax({
-                        url: '{{ route('students.delete-all') }}',
+                        url: '{{ route('user-course.delete-all') }}',
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",

@@ -192,4 +192,9 @@ class CoursesController extends Controller
         $data = SubCategory::where("category_id",$id)->pluck("title","id");
         return response()->json($data);
     }
+
+    public function getCourses(Request $request){
+        $data = CourseModel::where(["category"=>$request->category,"sub_category"=>$request->subCategory])->pluck("title","id");
+        return response()->json($data);
+    }
 }

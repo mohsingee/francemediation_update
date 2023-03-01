@@ -5,16 +5,18 @@
     <div class="card">
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
             <div class="daterange-container">
-                <a data-toggle="tooltip" class="btn btn-primary btn-sm btn-create"
-                    href="{{ route('user.create') }}"><i class="icon-plus"></i> Add User</a>
+                <button id="delBtn" class="btn btn-danger btn-sm btn-edit">
+                    <i class="icon-trash2"></i>
+                    <span class="">Delete</span>
+                </button>
             </div>
         </div>
-        <div class="btn-group mt-2 pr-2 d-flex" style="float:right;">
+        {{-- <div class="btn-group mt-2 pr-2 d-flex" style="float:right;">
             <button id="delBtn" class="btn btn-danger btn-sm btn-edit">
                 <i class="icon-trash2"></i>
                 <span class="">Delete</span>
             </button>
-        </div>
+        </div> --}}
         <hr>
         <div class="table-responsive text-nowrap">
             <table id="datatable" class="table card-table">

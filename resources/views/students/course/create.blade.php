@@ -2,9 +2,9 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-        <h5 class="card-header">Course Details</h5>
+        <h5 class="card-header">Select Course</h5>
         <div class="card-body">
-            <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user-course.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -16,23 +16,6 @@
             @endif
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Select Instructor</label>
-                <select name="instructor" id="" class="form-control">
-                    <option disabled selected>Select Instructor</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->first_name.' '.$user->last_name }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Course Title</label>
-                <input class="form-control" type="text" name="title" id="title" placeholder="Enter course title..."/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="image" class="form-label">Image</label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
-              <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Category</label>
                 <select name="category" id="categorySelected" class="form-control">
                     <option disabled selected>Select category</option>
@@ -43,13 +26,16 @@
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Sub Category</label>
+                <input type="hidden" name="cat_id" id="cat_id">
                 <select name="sub_category" id="subCategory" class="form-control">
                     <option disabled selected>Select sub category</option>
                 </select>
               </div>
               <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Price</label>
-                <input type="text" name="price" class="form-control" placeholder="Enter price">
+                <label class="form-label" for="exampleFormControlTextarea1">Courses</label>
+                <select name="course" id="course" class="form-control">
+                    <option disabled selected>Select course</option>
+                </select>
               </div>
             </div>
             <div class="mt-2">
@@ -73,13 +59,36 @@ $("body").on("change", "#categorySelected", function () {
 		success: function (response) {
 			if (response) {
 				$("#subCategory").empty();
+				$("#cat_id").val(category);
                 $("#subCategory").append('<option disabled selected>Select sub category</option>');
+                $("#course").empty();
+                $("#course").append('<option disabled selected>Select course</option>');
 				$.each(response, function (key, value) {
 					$("#subCategory").append('<option value="' + key + '">' + value + '</option>');
 				});
-			} else {
-				$("#subCategory").empty();
-				$("#subCategory").append('<option>Select Category First</option>');
+			}
+		},
+		error: function (response) {},
+	});
+});
+$("body").on("change", "#subCategory", function () {
+	let category = $('#cat_id').val();
+	let subCategory = $('#subCategory').val();
+	$.ajax({
+		type: "get",
+		url: '{{ route("get-courses") }}',
+		dataType: "json",
+        data: {
+			'category': category,
+			'subCategory': subCategory,
+		},
+		success: function (response) {
+			if (response) {
+				$("#course").empty();
+                $("#course").append('<option disabled selected>Select course</option>');
+				$.each(response, function (key, value) {
+					$("#course").append('<option value="' + key + '">' + value + '</option>');
+				});
 			}
 		},
 		error: function (response) {},

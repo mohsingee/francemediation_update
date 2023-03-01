@@ -17,6 +17,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserCourseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -140,6 +141,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('sub_categories', SubCategoryController::class);
     Route::get('sub_categories/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub_categories.delete');
     Route::post('/sub_categories/deleteAll', [SubCategoryController::class, 'deleteAll'])->name('sub_categories.delete-all');
+});
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
+    Route::resource('user-course', UserCourseController::class);
+    Route::get('delete/{id}', [UserCourseController::class, 'delete'])->name('user-course.delete');
+    Route::post('deleteAll', [UserCourseController::class, 'deleteAll'])->name('user-course.delete-all');
+    Route::get('get-courses', [CoursesController::class, 'getCourses'])->name('get-courses');
 });
 
 Route::get('auth/google', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');

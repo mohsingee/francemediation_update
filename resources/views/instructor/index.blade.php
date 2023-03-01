@@ -9,7 +9,7 @@
         </div>
     @endif
     <div class="card">
-        <h5 class="card-header">Manage Instructors</h5>
+        <h5 class="card-header">Instructors</h5>
         <div class="table-responsive text-nowrap">
             <table id="datatable" class="table card-table">
                 <thead>

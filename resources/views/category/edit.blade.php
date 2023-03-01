@@ -4,7 +4,7 @@
     <div class="card mb-4">
         <h5 class="card-header">Category Detail</h5>
         <div class="card-body">
-            <form action="{{ route('sub_categories.update',$category->id) }}" method="POST">
+            <form action="{{ route('categories.update',$category->id) }}" method="POST">
             @csrf
             @method('put')
             @if ($errors->any())
