@@ -29,10 +29,6 @@
                 <input class="form-control" type="text" name="title" id="title" placeholder="Enter course title..."/>
               </div>
               <div class="mb-3 col-md-6">
-                <label for="image" class="form-label">Image</label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
-              <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Category</label>
                 <select name="category" id="categorySelected" class="form-control">
                     <option disabled selected>Select category</option>
@@ -46,6 +42,10 @@
                 <select name="sub_category" id="subCategory" class="form-control">
                     <option disabled selected>Select sub category</option>
                 </select>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="image" class="form-label">Image</label>
+                <input class="form-control" type="file" name="image" id="image"/>
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Price</label>

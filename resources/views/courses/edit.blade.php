@@ -29,13 +29,6 @@
                 <label for="title" class="form-label">Course Title</label>
                 <input class="form-control" type="text" value="{{ $course->title }}" name="title" id="title" placeholder="Enter course title..."/>
               </div>
-              <div class="mb-3 col-md-4">
-                <label for="image" class="form-label">Image</label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
-              <div class="mb-3 col-md-2">
-                <img src="{{ asset('assets/courses/'.$course->image) }}" alt="" class="mt-4 img-fluid" width="70">
-              </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Category</label>
                 <select name="category" id="categorySelected" class="form-control">
@@ -52,6 +45,13 @@
                         <option value="{{ $subCat->id }}" @if($course->sub_category == $subCat->id) selected @endif>{{ $subCat->title }}</option>
                     @endforeach
                 </select>
+              </div>
+              <div class="mb-3 col-md-4">
+                <label for="image" class="form-label">Image</label>
+                <input class="form-control" type="file" name="image" id="image"/>
+              </div>
+              <div class="mb-3 col-md-2">
+                <img src="{{ asset('assets/courses/'.$course->image) }}" alt="" class="mt-4 img-fluid" width="70">
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Price</label>

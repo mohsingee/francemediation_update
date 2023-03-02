@@ -5,7 +5,7 @@
         <h5 class="card-header">Update Password</h5>
         <div class="card-body">
             <form action="#" method="post">
-			@csrf
+			      @csrf
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     @foreach ($errors->all() as $error)

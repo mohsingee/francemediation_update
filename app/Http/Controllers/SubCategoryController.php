@@ -32,7 +32,7 @@ class SubCategoryController extends Controller
                 return $btn1;
                 })
                 ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8 row">
+                    $btn = '<div class="col-md-8">
                     <a data-toggle="tooltip" href="'.route('sub_categories.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
                     <a data-toggle="tooltip" href="'.route('sub_categories.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
                     class="icon-trash2"></i>Delete</a>

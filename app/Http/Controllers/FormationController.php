@@ -46,20 +46,14 @@ class FormationController extends Controller
                         $url = url('admin/formation/status/' . $row->id . '/1');
                         $name = 'Inactive';
                     }
-                    $btn = '<div class="col-md-2 row">
+                    $btn = '<div class="col-md-2">
                    <a data-toggle="tooltip" href="' . $url . '" class="btn ' . $class . ' btn-sm btn-edit"><i class="icon-tick""></i>' . $name . '</a>
                     </div>';
 
                     return $btn;
                 })
                 ->addColumn('action', function($row){
-//                    $btn = '<div class="col-md-8 row">
-//                    <a data-toggle="tooltip" href="'.route('formation.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i
-//                    class="icon-pencil"></i>Edit</a> <a data-toggle="tooltip" href="'.route('formation.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-//                    class="icon-trash2"></i>Delete</a>
-//                    </div>';
-
-                    $btn = '<div class="col-md-8 row">
+                    $btn = '<div class="col-md-8">
                     <a data-toggle="tooltip" href="'.route('formation.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
                     <a data-toggle="tooltip" href="'.route('formation.show',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-eye2"></i>Show</a>
                     <a data-toggle="tooltip" href="'.route('formation.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i

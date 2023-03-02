@@ -59,7 +59,7 @@ class UserController extends Controller
                         $url = url('admin/user/status/' . $row2->id . '/1');
                         $name = 'Inactive';
                     }
-                    $btn = '<div class="col-md-2 row">
+                    $btn = '<div class="col-md-2">
                    <a data-toggle="tooltip" href="' . $url . '" class="btn ' . $class . ' btn-sm btn-edit"><i class="icon-tick""></i>' . $name . '</a>
                     </div>';
 

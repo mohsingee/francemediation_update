@@ -72,7 +72,7 @@ class MediatorController extends Controller
                         $url = url('admin/mediator/status/' . $row1->id . '/1');
                         $name = 'Inactive';
                     }
-                    $btn = '<div class="col-md-2 row">
+                    $btn = '<div class="col-md-2">
                    <a data-toggle="tooltip" href="' . $url . '" class="btn ' . $class . ' btn-sm btn-edit"><i class="icon-tick""></i>' . $name . '</a>
                     </div>';
 
@@ -85,7 +85,7 @@ class MediatorController extends Controller
 //                    class="icon-trash2"></i>Delete</a>
 //                    </div>';
 
-                    $btn = '<div class="col-md-8 row">
+                    $btn = '<div class="col-md-8">
                     <a data-toggle="tooltip" href="'.route('mediator.edit',$row->id).'" class="btn btn-info btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Edit</a>
                     <a data-toggle="tooltip" href="'.route('mediator.show',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-eye2"></i>View</a>
                     <a data-toggle="tooltip" href="'.route('mediator.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i

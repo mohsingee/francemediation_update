@@ -35,7 +35,7 @@ class ModuleSettingController extends Controller
                     return $btn1;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<div class="col-md-8 row">
+                    $btn = '<div class="col-md-8">
                     <a data-toggle="tooltip" href="' . route('modulesetting.edit', $row->id) . '" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Edit</a>
                     </div>';
 

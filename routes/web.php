@@ -17,6 +17,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\UserCourseController;
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +142,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('sub_categories', SubCategoryController::class);
     Route::get('sub_categories/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub_categories.delete');
     Route::post('/sub_categories/deleteAll', [SubCategoryController::class, 'deleteAll'])->name('sub_categories.delete-all');
+    
+    Route::resource('lectures', LectureController::class);
+    Route::get('lectures/add/{id}', [LectureController::class, 'add'])->name('lectures.add');
+    Route::get('lectures/delete/{id}', [LectureController::class, 'delete'])->name('lectures.delete');
+    Route::post('/lectures/deleteAll', [LectureController::class, 'deleteAll'])->name('lectures.delete-all');
 });
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::resource('user-course', UserCourseController::class);

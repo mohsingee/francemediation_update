@@ -34,7 +34,7 @@ class CmsController extends Controller
                 return $btn1;
                 })
                 ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8 row">
+                    $btn = '<div class="col-md-8">
                     <a target="_blank" data-toggle="tooltip" href="'.route('cms.preview',$row->slug).'" class="btn btn-info btn-sm btn-preview"><i
                     class="icon-eye2"></i>Preview</a> <a data-toggle="tooltip" href="'.route('cms.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i
                     class="icon-pencil"></i>Edit</a> <a data-toggle="tooltip" href="'.route('cms.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i

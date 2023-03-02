@@ -13,3 +13,4 @@
 <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables/dataTables.bs4-custom.css')}}" />
 <script src="{{asset('assets/admin/plugins/datatables/dataTables.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/duration-picker.js') }}"></script>
