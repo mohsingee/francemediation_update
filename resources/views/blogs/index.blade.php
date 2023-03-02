@@ -8,6 +8,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    <button class="btn btn-md btn-danger mb-2" id="delBtn">Delete Selected</button>
     <div class="card">
         <h5 class="card-header">Manage Blogs</h5>
         <div class="table-responsive text-nowrap">

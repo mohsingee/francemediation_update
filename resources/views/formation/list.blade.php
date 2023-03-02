@@ -11,6 +11,7 @@
                 {!! session()->get('success') !!}
             </div>
         @endif
+        <button class="btn btn-md btn-danger mb-2" id="delBtn">Delete Selected</button>
         <div class="table-responsive text-nowrap">
             <table id="datatable" class="table card-table">
                 <thead>
