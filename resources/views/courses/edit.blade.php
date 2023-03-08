@@ -47,7 +47,7 @@
                 </select>
               </div>
               <div class="mb-3 col-md-4">
-                <label for="image" class="form-label">Image</label>
+                <label for="image" class="form-label">Image <span class="text-danger">(image perfect size: 300*168)</span></label>
                 <input class="form-control" type="file" name="image" id="image"/>
               </div>
               <div class="mb-3 col-md-2">

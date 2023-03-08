@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+@section('style')
+<style>
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.5rem 0.5rem;
+}
+hr {
+    margin: 0;
+    color: #d9dee3;
+    background-color: currentColor;
+    border: 0;
+    opacity: 1;
+}
+</style>
+@endsection
 <!-- Responsive Table -->
 <div class="container-xxl flex-grow-1 container-p-y">
     @if (session()->has('success'))
@@ -8,117 +23,75 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <button class="btn btn-md btn-danger mb-2" id="delBtn">Delete Selected</button>
-    <div class="card">
-        <h5 class="card-header">Selected Course</h5>
-        <div class="table-responsive text-nowrap">
-            <table id="datatable" class="table card-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="checkalluser">
-                                <label class="custom-control-label" for="checkalluser"></label>
-                            </div>
-                        </th>
-                        <th>Title</th>
-                        <th>price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    
-                </tbody>
-            </table>
+    <!-- Form controls -->
+    <div class="col-md-12">
+        <div class="card mb-4">
+          <h5 class="card-header">Search courses</h5>
+          <div class="card-body">
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
+                  <select name="category_id" id="categorySelected" class="form-select">
+                      <option disabled selected>Select Category</option>
+                      @foreach ($categories as $cat)
+                          <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label" for="exampleFormControlTextarea1">Select Sub Category</label>
+                    <select name="category_id" id="subCategory" class="form-select">
+                        <option disabled selected>Select Sub Category</option>
+                    </select>
+                </div>
+            </div>
         </div>
+      </div>
     </div>
+    <div id="ajaxLoad"></div>
 </div>
   <!--/ Responsive Table -->
 @endsection
 @section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        var table = $('#datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('user-course.index') }}",
-            columns: [{
-                    data: 'check',
-                    name: 'check',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-
-        $('#checkalluser').on('click', function(e) {
-            if ($(this).is(':checked', true)) {
-                $(".values").prop('checked', true);
-            } else {
-                $(".values").prop('checked', false);
-            }
-        });
-
-        $("body").on('click', '.values', function(e) {
-            if ($('.values:checked').length == $('.values').length) {
-                $('#checkalluser').prop('checked', true);
-            } else {
-                $('#checkalluser').prop('checked', false);
-            }
-        });
-
-        $('#delBtn').on('click', function(e) {
-            var idsArr = [];
-            $(".values:checked").each(function() {
-                idsArr.push($(this).attr('id'));
-            });
-            if (idsArr.length <= 0) {
-                alert("Please select atleast one record to delete.");
-                return false;
-            } else {
-                var check = confirm("Are you sure you want to delete this row?");
-                if (check == true) {
-                    $.ajax({
-                        url: '{{ route('user-course.delete-all') }}',
-                        type: 'post',
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            ids: idsArr
-                        },
-                        success: function(data) {
-
-                            if (data['success'] == true) {
-                                $(".values:checked").each(function() {
-                                    $(this).parents("tr").remove();
-                                    $('#checkalluser').prop('checked', false);
-                                });
-
-                            } else {
-                                alert('Something went wrong, Please try again!!');
-                            }
-                        },
-                    });
-
-                } else {
-                    $(".values").prop('checked', false);
-                    $("#checkalluser").prop('checked', false);
-                }
-            }
-        });
-    });
+<script>
+$("body").on("change", "#categorySelected", function () {
+	let category = $('#categorySelected').val();
+    var url = '{{ route("get-sub-category", ":category") }}';
+    url = url.replace(':category', category);
+	$.ajax({
+		type: "get",
+		url: url,
+		dataType: "json",
+		success: function (response) {
+			if (response) {
+				$("#subCategory").empty();
+                $("#subCategory").append('<option disabled selected>Select sub category</option>');
+				$.each(response, function (key, value) {
+					$("#subCategory").append('<option value="' + key + '">' + value + '</option>');
+				});
+			} else {
+				$("#subCategory").empty();
+				$("#subCategory").append('<option>Select Category First</option>');
+			}
+		},
+		error: function (response) {},
+	});
+});
+$("body").on("change", "#subCategory", function () {
+	let subcategory = $('#subCategory').val();
+    var url = '{{ route("get-courses", ":subcategory") }}';
+    url = url.replace(':subcategory', subcategory);
+	$.ajax({
+		type: "get",
+		url: url,
+		dataType: "json",
+		success: function (response) {
+			if (response.status==true) {
+				$("#ajaxLoad").html(response.html);
+			}
+		},
+		error: function (response) {},
+	});
+});
 </script>
 @endsection

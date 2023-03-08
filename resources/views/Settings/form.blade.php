@@ -24,27 +24,23 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         @if (isset($settings[0]->logo))
                             <div class="form-group">
-                                <img class="logo-img" style="width: 250px; height: 186px;"
-                                    src="{{ asset('assets/images/' . $settings[0]->logo) }}" />
+                                <img class="logo-img" width="120" src="{{ asset('assets/images/' . $settings[0]->logo) }}" />
                             </div>
                         @endif
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="logo" name="logo" accept="image/*" />
-                            <label class="custom-file-label custom-file-label-primary" for="image">Choose Your
-                                Logo</label>
+                            <label for="image" class="form-label">Logo</label>
+                            <input class="form-control" type="file" name="logo" id="logo" accept="image/*"/>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         @if (isset($settings[0]->favicon))
                             <div class="form-group">
-                                <img class="favicon-img" style="width: 186px; height: 145px;"
-                                    src="{{ asset('assets/images/' . $settings[0]->favicon) }}" />
+                                <img class="favicon-img" width="120" src="{{ asset('assets/images/' . $settings[0]->favicon) }}" />
                             </div>
                         @endif
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="favicon" name="favicon" accept="image/*" />
-                            <label class="custom-file-label custom-file-label-primary" for="image">Choose Your
-                                Favicon</label>
+                            <label for="image" class="form-label">Favicon</label>
+                            <input class="form-control" type="file" name="favicon" id="favicon" accept="image/*"/>
                         </div>
                     </div>
 

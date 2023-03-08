@@ -30,7 +30,7 @@
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Category</label>
-                <select name="category" id="categorySelected" class="form-control">
+                <select name="category" id="categorySelected" class="form-select">
                     <option disabled selected>Select category</option>
                     @foreach($categories as $cat)
                         <option value="{{ $cat->id }}">{{ $cat->title }}</option>
@@ -39,12 +39,12 @@
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="exampleFormControlTextarea1">Sub Category</label>
-                <select name="sub_category" id="subCategory" class="form-control">
+                <select name="sub_category" id="subCategory" class="form-select">
                     <option disabled selected>Select sub category</option>
                 </select>
               </div>
               <div class="mb-3 col-md-6">
-                <label for="image" class="form-label">Image</label>
+                <label for="image" class="form-label">Image <span class="text-danger">(Image perfect size: 300*168)</span></label>
                 <input class="form-control" type="file" name="image" id="image"/>
               </div>
               <div class="mb-3 col-md-6">

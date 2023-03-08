@@ -177,23 +177,11 @@
       </li>
       @elseif(Auth::user()->role == '0')
       <!-- Selected courses -->
-      <li class="menu-item @if(Route::is('user-course.index')) active @elseif(Route::is('user-course.create')) active @endif">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-detail"></i>
-          <div data-i18n="Account Settings">Courses</div>
+      <li class="menu-item @if(Route::is('user-course.index')) active @endif">
+        <a href="{{ route('user-course.index') }}" class="menu-link">
+          <i class='menu-icon tf-icons bx bx-detail'></i>
+          <div data-i18n="Analytics">Find Courses</div>
         </a>
-        <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="{{ route('user-course.index') }}" class="menu-link">
-              <div data-i18n="Account">Selected Course</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="{{ route('user-course.create') }}" class="menu-link">
-              <div data-i18n="Notifications">Add Course</div>
-            </a>
-          </li>
-        </ul>
       </li>
       @endif
     </ul>

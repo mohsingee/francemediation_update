@@ -152,7 +152,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::resource('user-course', UserCourseController::class);
     Route::get('delete/{id}', [UserCourseController::class, 'delete'])->name('user-course.delete');
     Route::post('deleteAll', [UserCourseController::class, 'deleteAll'])->name('user-course.delete-all');
-    Route::get('get-courses', [CoursesController::class, 'getCourses'])->name('get-courses');
+    Route::get('get-courses/{id}', [CoursesController::class, 'getCourses'])->name('get-courses');
 });
 
 Route::get('auth/google', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');

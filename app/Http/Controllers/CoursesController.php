@@ -9,6 +9,7 @@ use App\Models\Instructor;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\File;
 
 class CoursesController extends Controller
 {
@@ -195,8 +196,14 @@ class CoursesController extends Controller
         return response()->json($data);
     }
 
-    public function getCourses(Request $request){
-        $data = CourseModel::where(["category"=>$request->category,"sub_category"=>$request->subCategory])->pluck("title","id");
-        return response()->json($data);
+    public function getCourses($id){
+        $course = CourseModel::where(["sub_category"=>$id])->first();
+        $data = CourseModel::where(["sub_category"=>$id])->get();
+        $html = view('students/course/courses',compact('data','course'))->render();
+        return response()->json([
+            'status'=>true,
+            'message'=>"data recieved",
+            'html'=>$html,
+        ]);
     }
 }
