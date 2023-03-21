@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
 {
@@ -15,34 +14,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $category = [];
-        if ($request->ajax()) {
-            $data = Category::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('categories.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('categories.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-                    return $btn;
-                })
-                ->rawColumns(['check','action'])
-                ->make(true);
-        }
-        return view('category.index', compact('category'));
+        $categories = Category::orderBy('id', 'DESC')->get();
+        return view('category.index', compact('categories'));
     }
 
     /**

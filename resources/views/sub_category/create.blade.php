@@ -1,50 +1,68 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Sub Category Details</h5>
-        <div class="card-body">
-            <form action="{{ route('sub_categories.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br />
-                    @endforeach
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-              <div class="mb-3 col-md-12">
-                <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
-                <select name="category_id" id="" class="form-control">
-                    <option disabled selected>Select Category</option>
-                    @foreach($category as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Category Title</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="Enter title..."
-                  autofocus
-                />
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="image" class="form-label">Category Image</label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Add Sub Category</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">Save</button>
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ route('sub_categories.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                      <div class="form-group">   
+                                        <select name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Category">
+                                          <option selected disabled>Select Category</option>
+                                          @foreach($category as $cat)
+                                              <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" name="title" placeholder="Sub Category Title..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="file" class="form-control" name="image" placeholder="Sub Category Image..."/>                                    
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
+                        </div>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
     </div>
-</div>
+</section>
 @endsection

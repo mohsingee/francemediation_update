@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\EventModel;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Testing\Fakes\EventFake;
 
@@ -16,33 +15,9 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $events = [];
-        if ($request->ajax()) {
-            $data = EventModel::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('events.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('events.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-                    return $btn;
-                })
-                ->rawColumns(['check','action'])
-                ->make(true);
-        }
+        $events = EventModel::orderBy('id', 'DESC')->get();
         return view('events.index', compact('events'));
     }
 

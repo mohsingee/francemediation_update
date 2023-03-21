@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use App\Models\Instructor;
 use Illuminate\Support\Facades\File;
 
@@ -15,34 +14,10 @@ class InstructorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $instructor = [];
-        if ($request->ajax()) {
-            $data = Instructor::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('instructor.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('instructor.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-                    return $btn;
-                })
-                ->rawColumns(['check','action'])
-                ->make(true);
-        }
-        return view('instructor.index', compact('instructor'));
+        $instructors = Instructor::orderBy('id', 'DESC')->get();
+        return view('instructor.index', compact('instructors'));
     }
 
     /**

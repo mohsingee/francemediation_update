@@ -8,7 +8,6 @@ use App\Models\CourseModel;
 use App\Models\Instructor;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\File;
 
 class CoursesController extends Controller
@@ -18,35 +17,9 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $courses = [];
-        if ($request->ajax()) {
-            $data = CourseModel::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('courses.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('courses.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    <a data-toggle="tooltip" href="'.route('lectures.add',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1">Add Lecture</a>
-                    <a data-toggle="tooltip" href="'.route('lectures.show',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1">View Lectures</a>
-                    </div>';
-                    return $btn;
-                })
-                ->rawColumns(['check','action'])
-                ->make(true);
-        }
+        $courses = CourseModel::orderBy('id', 'DESC')->get();
         return view('courses.index', compact('courses'));
     }
 

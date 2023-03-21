@@ -7,7 +7,6 @@ use App\Models\Training_submissions;
 use App\Models\Mediator_submissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreCmsRequest;
 use App\Http\Requests\UpdateCmsRequest;
@@ -21,82 +20,9 @@ class MediatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $users = [];
-        if ($request->ajax()) {
-            $data = Mediator_submissions::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->editColumn('region', function ($row1) {
-                    $regions = array (
-                        0 => 'Auvergne-rhone-alpes',
-                        1 => 'Bourgogne-Franche-Comté',
-                        2 => 'Bretagne',
-                        3 => 'Centre-Val de Loire',
-                        4 => 'Corse',
-                        5 => 'Grand-Est',
-                        6 => 'Guadeloupe',
-                        7 => 'Guyane',
-                        8 => 'Hauts-de-France',
-                        9 => 'Île-de-France',
-                        10 => 'Martinique',
-                        11 => 'Mayotte',
-                        12 => 'Normandie',
-                        13 => 'Nouvelle-Aquitaine',
-                        14 => 'Occitanie',
-                        15 => 'Pays de la Loire',
-                        16 => 'Provence-Alpes Côte d\'Azur',
-                        17 => 'Réunion',
-                    );
-                    $val = $regions[$row1->region];
-
-                    return $val;
-                })
-                ->editColumn('status', function ($row1) {
-                    if ($row1->status == '1') {
-                        $class = 'btn-success';
-                        $url = url('admin/mediator/status/' . $row1->id . '/0');
-                        $name = 'Active';
-                    } else {
-                        $class = 'btn-warning';
-                        $url = url('admin/mediator/status/' . $row1->id . '/1');
-                        $name = 'Inactive';
-                    }
-                    $btn = '<div class="col-md-2">
-                   <a data-toggle="tooltip" href="' . $url . '" class="btn ' . $class . ' btn-sm btn-edit"><i class="icon-tick""></i>' . $name . '</a>
-                    </div>';
-
-                    return $btn;
-                })
-                ->addColumn('action', function($row){
-//                    $btn = '<div class="col-md-8 row">
-//                    <a data-toggle="tooltip" href="'.route('formation.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i
-//                    class="icon-pencil"></i>Edit</a> <a data-toggle="tooltip" href="'.route('formation.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-//                    class="icon-trash2"></i>Delete</a>
-//                    </div>';
-
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('mediator.edit',$row->id).'" class="btn btn-info btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Edit</a>
-                    <a data-toggle="tooltip" href="'.route('mediator.show',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-eye2"></i>View</a>
-                    <a data-toggle="tooltip" href="'.route('mediator.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-
-                    return $btn;
-                })
-                ->rawColumns(['check','region','status','action'])
-                ->make(true);
-        }
+        $users =  Mediator_submissions::orderBy('id', 'DESC')->get();
         return view('mediator.list', compact('users'));
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Blog_detail;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Validator;
@@ -17,33 +16,9 @@ class BlogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $blogs = [];
-        if ($request->ajax()) {
-            $data = Blog::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('blogs.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('blogs.delete',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-                    return $btn;
-                })
-                ->rawColumns(['check','action'])
-                ->make(true);
-        }
+        $blogs = Blog::orderBy('id', 'DESC')->get();
         return view('blogs.index', compact('blogs'));
     }
 

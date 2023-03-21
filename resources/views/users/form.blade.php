@@ -1,180 +1,93 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <form id="SignUp" action="{{ isset($user->id) ? route('user.update', $user->id) : route('user.store') }}"
-        method="POST" enctype="multipart/form-data">
-        @csrf
-
-        @if ($errors->any())
-            <div class="validation error">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true" id="cross">×</span></button>
-                <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}<br />
-                @endforeach
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Basic Form Elements</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-        @endif
-        <input type="hidden" id="id" name="id" value="{{ isset($user) ? $user->id : '' }}">
-        <div class="card">
-            <div class="card-body">
-                <div class="row gutters" >
-                    @if (isset($user))
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="form-group">
-                                <!-- Gallery start -->
-                                <div class="baguetteBoxThree gallery">
-                                    <!-- Row start -->
-                                    <div class="row gutters" id="selectedImage">
-                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6">
-                                            @if ($user->image != '')
-                                                <a href="{{ asset('assets/images/' . $user->image) }}" >
-                                                    <img src="{{ asset('assets/images/' . $user->image) }}"
-                                                        class="img-responsive" width="90">
-                                                    <div class="overlay">
-                                                        <span class="expand">+</span>
-                                                    </div>
-                                                </a>
-                                            @else
-                                                <a href="{{ asset('assets/images/user.png') }}">
-                                                    <img src="{{ asset('assets/images/user.png') }}" class="img-responsive" width="90"/>
-                                                    <div class="overlay">
-                                                        <span class="expand">+</span>
-                                                    </div>
-                                                </a>
-                                            @endif
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ isset($user->id) ? route('user.update', $user->id) : route('user.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @if(isset($user->id))
+                                    @method('put')
+                                @endif
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" name="firstname" value="{{ isset($user->firstname) ? $user->firstname : '' }}" placeholder="First Name..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="text" class="form-control" name="lastname" value="{{ isset($user->lastname) ? $user->lastname : '' }}" placeholder="Last Name..." />                                    
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    @endif
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="firstname" name="firstname"
-                                placeholder="First Name *"
-                                value="{{ isset($user->firstname) ? $user->firstname : '' }}" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                placeholder="Last Name *"
-                                value="{{ isset($user->lastname) ? $user->lastname : '' }}" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Username *"
-                                value="{{ isset($user->username) ? $user->username : '' }}" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Email Address *"
-                                value="{{ isset($user->email) ? $user->email : '' }}" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" value="{{ isset($user->image) ? $user->image : '' }}" id="image" name="image" />
-                            <label class="custom-file-label custom-file-label-primary" for="image">Choose
-                                profile Image</label>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div class="form-group"
-                            <input type="password" class="form-control" id="password_confirmation"
-                                name="password_confirmation" placeholder="Confirm Password" />
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" name="username" value="{{ isset($user->username) ? $user->username : '' }}" placeholder="Username..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="text" class="form-control" name="email" value="{{ isset($user->email) ? $user->email : '' }}" placeholder="Email Address..." />                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    @if(isset($user->id))
+                                        @php $class = "col-sm-4";@endphp
+                                    @else
+                                        @php $class = "col-sm-6";@endphp
+                                    @endif
+                                    <div class="{{ $class }}">
+                                        <div class="form-group">                                    
+                                            <input type="file" name="image" class="form-control"/>                                   
+                                        </div>
+                                    </div>
+                                    @if(isset($user->id))
+                                    <div class="col-sm-2">
+                                        <img src="{{ asset('assets/images/' . $user->image) }}" alt="" width="80">
+                                    </div>
+                                    @endif
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="password" name="password" class="form-control" placeholder="Password..." />                                    
+                                        </div>
+                                    </div>
+                                </div>            
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
                         </div>
                     </div>
                 </div>
-                        <div id="formmodel">
-            		</div>
-                    <br>
-                <div class="actions clearfix">
-                    <button type="submit" class="btn btn-primary"><span class="icon-save2"></span>
-                        @if ($result['method'] == 'add')
-                            Save
-                        @else
-                            Update
-                        @endif
-                    </button>
-                </div>
-            </div></div>
-    </form>
-</div>
-@endsection
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.datepicker').datetimepicker({
-            format: 'Y-m-d',
-            timepicker: false,
-            closeOnDateSelect: true,
-            scrollInput: false,
-            maxDate: 'now()',
-        });
-        // $(".validation").hide();
-        $("#cross").on('click', function() {
-            $(".validation").hide();
-        });
-	@if(isset($user))
-		var id = '{{$user->id}}';
-		var url = "{{route('modulesetting.editattribute',$user->id)}}";
-	@else
-		var page = 'user';
-		var url = "{{route('modulesetting.getattribute','user')}}";
-	@endif
-	$.ajax({
-
-        "url": url,
-        success: function(data){
-        		if(data != "false"){
-                $("#formmodel").html(data);
-            }
-            },
-      
- 	}); 
-        var selDiv = "";
-        var storedFiles = [];
-        $(document).ready(function() {
-
-            $("#image").on("change", handleFileSelect);
-            selDiv = $("#selectedImage");
-
-        });
-
-        function handleFileSelect(e) {
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-
-            filesArr.forEach(function(f) {
-                if (!f.type.match("image.*")) {
-                    return;
-                }
-
-                storedFiles.push(f);
-
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    var html = '<img style="width: 186px; height: 186px;" src="' + e.target.result + '" />';
-                    console.log(html);
-                    selDiv.html(html);
-
-                }
-                reader.readAsDataURL(f);
-            });
-        }
-    });
-</script>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

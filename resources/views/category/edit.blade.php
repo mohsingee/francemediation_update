@@ -1,46 +1,60 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Category Detail</h5>
-        <div class="card-body">
-            <form action="{{ route('categories.update',$category->id) }}" method="POST">
-            @csrf
-            @method('put')
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br />
-                    @endforeach
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Category Title</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="title"
-                  name="title"
-                  value="{{ $category->title }}"
-                  placeholder="Enter title..."
-                  autofocus
-                />
-              </div>
-              <div class="mb-3 col-md-4">
-                <label for="image" class="form-label">Category Image</label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
-              <div class="mb-3 col-md-2">
-                <img src="{{ asset('assets/category/'.$category->image) }}" alt="" width="70" class="img-fluid mt-4">
-              </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Edit Category</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ route('categories.update',$category->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" value="{{ $category->title }}" name="title" placeholder="Category Title..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">                                   
+                                            <input type="file" class="form-control" name="image" placeholder="Category Image..."/>                                    
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <img src="{{ asset('assets/category/'.$category->image) }}" alt="" width="70" class="img-fluid">
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
+                        </div>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
     </div>
-</div>
+</section>
 @endsection

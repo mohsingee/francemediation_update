@@ -1,123 +1,65 @@
 @extends('layouts.app')
 @section('content')
-<!-- Responsive Table -->
-<div class="container-xxl flex-grow-1 container-p-y">
-    @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-            {!! session()->get('success') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Courses</h2>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>                                
+                </div>
+            </div>
         </div>
-    @endif
-    <div class="card">
-        <h5 class="card-header">Manage Courses</h5>
-        <div class="table-responsive text-nowrap">
-            <table id="datatable" class="table card-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="checkalluser">
-                                <label class="custom-control-label" for="checkalluser"></label>
+
+        <div class="container-fluid">
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach($courses as $key=>$course)
+                                        <tr>
+                                            <td>{{ $key+1 }}</td>
+                                            <td>{{ $course->title }}</td>
+                                            <td>{{ $course->price }}</td>
+                                            <td>
+                                                <a href="{{ route('courses.edit',$course->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="{{ route('lectures.show',$course->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="{{ route('courses.destroy',$course->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="{{ route('lectures.add',$course->id) }}" class="btn btn-sm btn-info">Add Lecture</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                        </th>
-                        <th>Title</th>
-                        <th>price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-  <!--/ Responsive Table -->
-@endsection
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        var table = $('#datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('courses.index') }}",
-            columns: [{
-                    data: 'check',
-                    name: 'check',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-
-        $('#checkalluser').on('click', function(e) {
-            if ($(this).is(':checked', true)) {
-                $(".values").prop('checked', true);
-            } else {
-                $(".values").prop('checked', false);
-            }
-        });
-
-        $("body").on('click', '.values', function(e) {
-            if ($('.values:checked').length == $('.values').length) {
-                $('#checkalluser').prop('checked', true);
-            } else {
-                $('#checkalluser').prop('checked', false);
-            }
-        });
-
-        $('#delBtn').on('click', function(e) {
-            var idsArr = [];
-            $(".values:checked").each(function() {
-                idsArr.push($(this).attr('id'));
-            });
-            if (idsArr.length <= 0) {
-                alert("Please select atleast one record to delete.");
-                return false;
-            } else {
-                var check = confirm("Are you sure you want to delete this row?");
-                if (check == true) {
-                    $.ajax({
-                        url: '{{ route('courses.delete-all') }}',
-                        type: 'post',
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            ids: idsArr
-                        },
-                        success: function(data) {
-
-                            if (data['success'] == true) {
-                                $(".values:checked").each(function() {
-                                    $(this).parents("tr").remove();
-                                    $('#checkalluser').prop('checked', false);
-                                });
-
-                            } else {
-                                alert('Something went wrong, Please try again!!');
-                            }
-                        },
-                    });
-
-                } else {
-                    $(".values").prop('checked', false);
-                    $("#checkalluser").prop('checked', false);
-                }
-            }
-        });
-    });
-</script>
+</section>
 @endsection

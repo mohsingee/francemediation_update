@@ -1,70 +1,100 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Edit Course Details</h5>
-        <div class="card-body">
-            <form action="{{ route('courses.update',$course->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('put')
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br />
-                    @endforeach
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Select Instructor</label>
-                <select name="instructor" id="" class="form-control">
-                    <option disabled selected>Select Instructor</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}" @if($course->instructor == $user->id) selected @endif>{{ $user->first_name.' '.$user->last_name }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Course Title</label>
-                <input class="form-control" type="text" value="{{ $course->title }}" name="title" id="title" placeholder="Enter course title..."/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Category</label>
-                <select name="category" id="categorySelected" class="form-control">
-                    <option disabled selected>Select category</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}" @if($course->category == $cat->id) selected @endif>{{ $cat->title }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Sub Category</label>
-                <select name="sub_category" id="subCategory" class="form-control">
-                    @foreach($sub_categories as $subCat)
-                        <option value="{{ $subCat->id }}" @if($course->sub_category == $subCat->id) selected @endif>{{ $subCat->title }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3 col-md-4">
-                <label for="image" class="form-label">Image <span class="text-danger">(image perfect size: 300*168)</span></label>
-                <input class="form-control" type="file" name="image" id="image"/>
-              </div>
-              <div class="mb-3 col-md-2">
-                <img src="{{ asset('assets/courses/'.$course->image) }}" alt="" class="mt-4 img-fluid" width="70">
-              </div>
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Price</label>
-                <input type="text" name="price" class="form-control" value="{{ $course->price }}" placeholder="Enter price">
-              </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Edit Course</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ route('courses.update',$course->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                      <div class="form-group">   
+                                        <select name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Instructor">
+                                          <option selected disabled>Select Instructor</option>
+                                          @foreach($users as $user)
+                                            <option value="{{ $user->id }}" @if($course->instructor == $user->id) selected @endif>{{ $user->first_name.' '.$user->last_name }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="form-group">   
+                                        <input type="text" class="form-control" value="{{ $course->title }}" name="title" placeholder="Course Title...">
+                                      </div>
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                      <div class="form-group">   
+                                        <select name="category" id="categorySelected" class="form-control show-tick ms select2" data-placeholder="Select Category">
+                                          <option selected disabled>Select Category</option>
+                                          @foreach($categories as $cat)
+                                            <option value="{{ $cat->id }}" @if($course->category == $cat->id) selected @endif>{{ $cat->title }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="form-group">   
+                                        <select name="sub_category" id="subCategory" class="form-control show-tick ms select2" data-placeholder="Select Sub Category">
+                                          @foreach($sub_categories as $subCat)
+                                              <option value="{{ $subCat->id }}" @if($course->sub_category == $subCat->id) selected @endif>{{ $subCat->title }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">                                    
+                                            <input type="file" class="form-control" name="image"/>
+                                            <span class="text-danger">(Image perfect size: 300*168)</span>                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                      <img src="{{ asset('assets/courses/'.$course->image) }}" alt="" class="mt-4 img-fluid" width="70">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="number" class="form-control" value="{{ $course->price }}" name="price" placeholder="Course Price..."/>                                    
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
+                        </div>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
     </div>
-</div>
+</section>
 @endsection
 @section('scripts')
 <script>

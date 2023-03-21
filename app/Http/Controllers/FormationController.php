@@ -6,7 +6,6 @@ use App\Models\Cms;
 use App\Models\Training_submissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreCmsRequest;
 use App\Http\Requests\UpdateCmsRequest;
@@ -20,51 +19,9 @@ class FormationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $users = [];
-        if ($request->ajax()) {
-            $data = Training_submissions::orderBy('id', 'DESC')->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('check', function($row1){
-                    $btn1 = '<div class="custom-control custom-checkbox">
-                        <input class="custom-control-input values" name="userselect[]"
-                        value="'.$row1->id.'" type="checkbox" id="' . $row1->id.'">
-                        <label class="custom-control-label" for="' . $row1->id.'"></label>
-                        </div>';
-
-                return $btn1;
-                })
-                ->editColumn('status', function($row){
-                    if ($row->status == '1') {
-                        $class = 'btn-success';
-                        $url = url('admin/formation/status/' . $row->id . '/0');
-                        $name = 'Active';
-                    } else {
-                        $class = 'btn-warning';
-                        $url = url('admin/formation/status/' . $row->id . '/1');
-                        $name = 'Inactive';
-                    }
-                    $btn = '<div class="col-md-2">
-                   <a data-toggle="tooltip" href="' . $url . '" class="btn ' . $class . ' btn-sm btn-edit"><i class="icon-tick""></i>' . $name . '</a>
-                    </div>';
-
-                    return $btn;
-                })
-                ->addColumn('action', function($row){
-                    $btn = '<div class="col-md-8">
-                    <a data-toggle="tooltip" href="'.route('formation.edit',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-pencil"></i>Eidt</a>
-                    <a data-toggle="tooltip" href="'.route('formation.show',$row->id).'" class="btn btn-primary btn-sm btn-edit ml-1"><i class="icon-eye2"></i>Show</a>
-                    <a data-toggle="tooltip" href="'.route('formation.destroy',$row->id).'" class="btn btn-danger btn-sm btn-edit ml-1"><i
-                    class="icon-trash2"></i>Delete</a>
-                    </div>';
-
-                    return $btn;
-                })
-                ->rawColumns(['check','status','action'])
-                ->make(true);
-        }
+        $users =  Training_submissions::orderBy('id', 'DESC')->get();
         return view('formation.list', compact('users'));
     }
     /**

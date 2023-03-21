@@ -1,72 +1,101 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Edit Blog Detail</h5>
-        <div class="card-body">
-            <form action="{{ route('blogs.update',$blog->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br />
-                    @endforeach
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Blog Title</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="title"
-                  name="title"
-                  value="{{ $blog->title }}"
-                  placeholder="Enter title..."
-                  autofocus
-                />
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="author" class="form-label">Blog Author</label>
-                <input class="form-control" value="{{ $blog->author }}" type="text" name="author" id="author" placeholder="Enter author name..."/>
-              </div>
-              <div class="mb-3 col-md-3">
-                <label for="thumbnail_img" class="form-label">Thumbnail Image</label>
-                <input class="form-control" type="file" name="thumbnail_img" id="thumbnail_img"/>
-              </div>
-              <div class="mb-3 col-md-1">
-                <img src="{{ asset('assets/blogs/'.$blog->thumbnail_img) }}" alt="" width="70" class="mt-4">
-              </div>
-              <div class="mb-3 col-md-3">
-                <label for="banner_img" class="form-label">Banner Image</label>
-                <input class="form-control" type="file" name="banner_img" id="banner_img"/>
-              </div>
-              <div class="mb-3 col-md-1">
-                <img src="{{ asset('assets/blogs/'.$blog->banner_img) }}" alt="" width="70" class="mt-4">
-              </div>
-              <div class="mb-3 col-md-3">
-                <label for="detail_img" class="form-label">Detail Image</label>
-                <input class="form-control" type="file" name="detail_img" id="detail_img"/>
-              </div>
-              <div class="mb-3 col-md-1">
-                <img src="{{ asset('assets/blogs/'.$blog->detail_img) }}" alt="" width="70" class="mt-4">
-              </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Edit Blog</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="mb-3 col-md-12">
-                <label for="short_description" class="form-label">Short description</label>
-                <textarea name="short_description" id="short_description" class="form-control" cols="30" rows="2" placeholder="Enter short description...">{{ $blog->short_description }}</textarea>
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ route('blogs.update',$blog->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" name="title" value="{{ $blog->title }}" placeholder="Blog Title..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="text" class="form-control" name="author" value="{{ $blog->author }}" placeholder="Blog Author..." />                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">                                    
+                                            <input type="file" class="form-control" name="thumbnail_img" placeholder="Thumbnail Image..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                      <img src="{{ asset('assets/blogs/'.$blog->thumbnail_img) }}" alt="" width="70">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">                                   
+                                            <input type="file" class="form-control" name="banner_img" placeholder="Banner Image..." />                                    
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                      <img src="{{ asset('assets/blogs/'.$blog->banner_img) }}" alt="" width="70">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">                                   
+                                            <input type="file" class="form-control" name="detail_img" placeholder="Detail Image..." />                                    
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                      <img src="{{ asset('assets/blogs/'.$blog->detail_img) }}" alt="" width="70">
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">                                    
+                                          <div class="form-line">
+                                            <textarea rows="4" class="form-control no-resize" name="short_description" placeholder="Short Descritpion...">{{ $blog->short_description }}</textarea>
+                                        </div>                                   
+                                        </div>
+                                    </div>
+                                </div>           
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">                                    
+                                          <div class="form-line">
+                                            <textarea rows="4" class="form-control no-resize" name="long_description" placeholder="Long Description...">{{ $blog->long_description }}</textarea>
+                                          </div>                                   
+                                        </div>
+                                    </div>
+                                </div>           
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3 col-md-12">
-                <label for="long_description" class="form-label">Long description</label>
-                <textarea name="long_description" id="long_description" class="form-control" cols="30" rows="2" placeholder="Enter long description...">{{ $blog->long_description }}</textarea>
-            </div>
-            <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">Save changes</button>
-            </div>
-          </form>
         </div>
     </div>
-</div>
+</section>
 @endsection

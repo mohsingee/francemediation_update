@@ -211,7 +211,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
         $input = $request->all();
         $user ='user';
         $module=ModuleSettingController::getattributeStore($user);
