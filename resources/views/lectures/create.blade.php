@@ -1,52 +1,81 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card mb-4">
-        <h5 class="card-header">Add New Lecture</h5>
-        <div class="card-body">
-            <form action="{{ route('lectures.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br />
-                    @endforeach
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="exampleFormControlTextarea1">Select Course</label>
-                <select name="course_id" id="" class="form-control">
-                    <option value="{{ $course->id }}">{{ $course->title }}</option>
-                </select>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">Title</label>
-                <input class="form-control" type="text" name="title" id="title" placeholder="Enter lecture title..."/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="duration" class="form-label">Duration</label>
-                <input class="form-control html-duration-picker" type="text" name="duration" id="duration"/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="youtube_link" class="form-label">Youtube Link</label>
-                <input class="form-control" type="text" name="youtube_link" id="youtube_link" placeholder="Enter youtube video link..."/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="vimeo_link" class="form-label">Vimeo Link</label>
-                <input class="form-control" type="text" name="vimeo_link" id="vimeo_link" placeholder="Enter vimeo video link..."/>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="file" class="form-label">Upload Files</label>
-                <input class="form-control" type="file" name="file" id="file"/>
-              </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Add New Lecture</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">Save</button>
+        </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="{{ route('lectures.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <input type="text" class="form-control" value="{{ $course->title }}" disabled>
+                                          <input type="hidden" class="form-control" name="course_id" value="{{ $course->id }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="text" class="form-control" name="title" placeholder="Title..." />                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="date" class="form-control html-duration-picker" name="duration" placeholder="Duration..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="text" class="form-control" name="youtube_link" placeholder="Youtube link..." />                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                    
+                                            <input type="text" class="form-control" name="vimeo_link" placeholder="Vimeo link..." />                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">                                   
+                                            <input type="file" class="form-control" name="file"/>                                    
+                                        </div>
+                                    </div>
+                                </div>                 
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>                                   
+                                    </div>
+                                </div> 
+                            </form>           
+                        </div>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
     </div>
-</div>
+</section>
 @endsection

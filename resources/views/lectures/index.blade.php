@@ -1,118 +1,66 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-            {!! session()->get('success') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Lectures</h2>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>                                
+                </div>
+            </div>
         </div>
-    @endif
-    <button class="btn btn-md btn-danger mb-2" id="delBtn">Delete Selected</button>
-    <div class="card">
-        <h5 class="card-header">All Lectures</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="checkalluser">
-                            <label class="custom-control-label" for="checkalluser"></label>
+
+        <div class="container-fluid">
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Course</th>
+                                            <th>Title</th>
+                                            <th>Duration</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Course</th>
+                                            <th>Title</th>
+                                            <th>Duration</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach($lectures as $key=>$lecture)
+                                        <tr>
+                                            <td>{{ $key+1 }}</td>
+                                            <td>{{ $lecture->course->title }}</td>
+                                            <td>{{ $lecture->title }}</td>
+                                            <td>{{ $lecture->duration }}</td>
+                                            <td>
+                                                <a href="{{ route('lectures.edit',$lecture->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="{{ route('lectures.destroy',$lecture->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </th>
-                    <th>Course title</th>
-                    <th>Title</th>
-                    <th>Duration</th>
-                    {{-- <th>Lecture</th> --}}
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                @forelse ($lectures as $lec)
-                <tr>
-                    <td>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input values" name="userselect[]"
-                            value="{{ $lec->id }}" type="checkbox" id="{{ $lec->id }}">
-                            <label class="custom-control-label" for="{{ $lec->id }}"></label>
-                        </div>
-                    </td>
-                    <td><strong>{{ $lec->course->title }}</strong></td>
-                    <td>{{ $lec->title }}</td>
-                    <td>@if($lec->duration){{ $lec->duration }}@else file selected @endif</td>
-                    <td>
-                        <a href="{{ route('lectures.edit',$lec->id) }}" class="btn btn-sm btn-info">Edit</a>
-                        <a href="{{ route('lectures.delete',$lec->id) }}" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center">No records found.</td>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-@endsection
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#checkalluser').on('click', function(e) {
-            if ($(this).is(':checked', true)) {
-                $(".values").prop('checked', true);
-            } else {
-                $(".values").prop('checked', false);
-            }
-        });
-
-        $("body").on('click', '.values', function(e) {
-            if ($('.values:checked').length == $('.values').length) {
-                $('#checkalluser').prop('checked', true);
-            } else {
-                $('#checkalluser').prop('checked', false);
-            }
-        });
-
-        $('#delBtn').on('click', function(e) {
-            var idsArr = [];
-            $(".values:checked").each(function() {
-                idsArr.push($(this).attr('id'));
-            });
-            if (idsArr.length <= 0) {
-                alert("Please select atleast one record to delete.");
-                return false;
-            } else {
-                var check = confirm("Are you sure you want to delete this row?");
-                if (check == true) {
-                    $.ajax({
-                        url: '{{ route('lectures.delete-all') }}',
-                        type: 'post',
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            ids: idsArr
-                        },
-                        success: function(data) {
-
-                            if (data['success'] == true) {
-                                $(".values:checked").each(function() {
-                                    $(this).parents("tr").remove();
-                                    $('#checkalluser').prop('checked', false);
-                                });
-
-                            } else {
-                                alert('Something went wrong, Please try again!!');
-                            }
-                        },
-                    });
-
-                } else {
-                    $(".values").prop('checked', false);
-                    $("#checkalluser").prop('checked', false);
-                }
-            }
-        });
-    });
-</script>
+</section>
 @endsection

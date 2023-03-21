@@ -6,7 +6,7 @@
 <script src="{{ asset('assets/admin/bundles/sparkline.bundle.js') }}"></script> <!-- Sparkline Plugin Js -->
 <script src="{{ asset('assets/admin/bundles/c3.bundle.js') }}"></script>
 <!-- Jquery DataTable Plugin Js --> 
-<script src="{{ asset('assets/admin/bundles/datatablescripts.bundle.js') }}"></>
+<script src="{{ asset('assets/admin/bundles/datatablescripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
