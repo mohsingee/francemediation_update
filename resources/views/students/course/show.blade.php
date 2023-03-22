@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <!-- Input -->
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-8 col-md-8 col-sm-8">
                     <div class="card">
                         <div class="body">
                             <h5 class="card-title text-center">Course Info</h5>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <img src="{{ asset('assets/courses/'.$course->image) }}" class="card-img-top"/>
                         <div class="card-body">
