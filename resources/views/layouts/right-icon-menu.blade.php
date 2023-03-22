@@ -14,7 +14,7 @@
 <div class="navbar-right">
     <ul class="navbar-nav">
         <li><a href="#search" class="main_search" title="Search..."><i class="zmdi zmdi-search"></i></a></li>
-        <li class="dropdown">
+        {{-- <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="App" data-toggle="dropdown" role="button"><i class="zmdi zmdi-apps"></i></a>
             <ul class="dropdown-menu slideUp2">
                 <li class="header">App Sortcute</li>
@@ -59,8 +59,8 @@
                     </ul>
                 </li>
             </ul>
-        </li>
-        <li class="dropdown">
+        </li> --}}
+        {{-- <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -135,8 +135,8 @@
                 </li>
                 <li class="footer"> <a href="javascript:void(0);">View All Notifications</a> </li>
             </ul>
-        </li>
-        <li class="dropdown">
+        </li> --}}
+        {{-- <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-flag"></i>
             <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -219,10 +219,10 @@
                     </ul>
                 </li>
             </ul>
-        </li>
-        <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>
+        </li> --}}
+        {{-- <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>
         <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>
-        <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>
+        <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li> --}}
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
         {{-- <li><a href="sign-in.html" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li> --}}
         <li>

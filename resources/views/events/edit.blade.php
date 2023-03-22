@@ -55,7 +55,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-3">
                                         <div class="form-group">                                    
-                                            <input type="text" class="form-control" name="thumbnail_img" placeholder="Thumbnail Image..." />                                   
+                                            <input type="file" class="form-control" name="thumbnail_img" placeholder="Thumbnail Image..." />                                   
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">                                   
-                                            <input type="text" class="form-control" name="banner_img" placeholder="Banner Image..." />                                    
+                                            <input type="file" class="form-control" name="banner_img" placeholder="Banner Image..." />                                    
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">                                   
-                                            <input type="text" class="form-control" name="detail_img" placeholder="Detail Image..." />                                    
+                                            <input type="file" class="form-control" name="detail_img" placeholder="Detail Image..." />                                    
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
