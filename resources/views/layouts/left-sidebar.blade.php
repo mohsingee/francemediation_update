@@ -2,7 +2,7 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.html"><img src="{{ asset('assets/images/'.$favicon->logo) }}" width="25" alt="Aero"><span class="m-l-10">Aero</span></a>
+        <a href="{{ route('dashboard') }}"><img src="{{ asset('assets/images/'.$favicon->logo) }}" width="25" alt="Aero"><span class="m-l-10">France Mediation</span></a>
     </div>
     <div class="menu">
         <ul class="list">
@@ -11,7 +11,7 @@
                     @if (Auth::user()->role == '1')
                     <a class="image" href="{{ route('admin.profile') }}"><img src="{{ asset('assets/images/' . auth()->user()->image) }}" alt="User"></a>
                     @else
-                    <img src="{{ asset('assets/images/user.png') }}" alt="User">
+                    <img src="{{ asset('assets/images/user.png') }}" alt="User" width="50">
                     @endif
                     <div class="detail">
                         <h4>{{ Auth::user()->firstname }}</h4>

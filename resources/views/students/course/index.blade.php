@@ -15,42 +15,63 @@ hr {
 }
 </style>
 @endsection
-<!-- Responsive Table -->
-<div class="container-xxl flex-grow-1 container-p-y">
-    @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-            {!! session()->get('success') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    <!-- Form controls -->
-    <div class="col-md-12">
-        <div class="card mb-4">
-          <h5 class="card-header">Search courses</h5>
-          <div class="card-body">
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
             <div class="row">
-                <div class="mb-3 col-md-6">
-                  <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
-                  <select name="category_id" id="categorySelected" class="form-select">
-                      <option disabled selected>Select Category</option>
-                      @foreach ($categories as $cat)
-                          <option value="{{ $cat->id }}">{{ $cat->title }}</option>
-                      @endforeach
-                  </select>
-                </div>
-                <div class="mb-3 col-md-6">
-                    <label class="form-label" for="exampleFormControlTextarea1">Select Sub Category</label>
-                    <select name="category_id" id="subCategory" class="form-select">
-                        <option disabled selected>Select Sub Category</option>
-                    </select>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Search Courses</h2>
+                    @if ($errors->any())
+                        <div class="validation error">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true" id="cross">×</span></button>
+                            <i class="icon-warning2"></i><strong>Oh snap!</strong><br>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br />
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-      </div>
+        
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleFormControlTextarea1">Select Category</label>
+                                        <select name="category_id" id="categorySelected" class="form-control show-tick ms select2">
+                                            <option disabled selected>Select Category</option>
+                                            @foreach ($categories as $cat)
+                                                <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleFormControlTextarea1">Select Sub Category</label>
+                                        <select name="category_id" id="subCategory" class="form-control show-tick ms select2">
+                                            <option disabled selected>Select Sub Category</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ajaxLoad"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="ajaxLoad"></div>
-</div>
-  <!--/ Responsive Table -->
+</section>
 @endsection
 @section('scripts')
 <script>

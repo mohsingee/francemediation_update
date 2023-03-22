@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-<title>{{ config('app.name', 'Laravel') }}</title>
+<title>{{ config('app.name', 'France Mediation') }}</title>
 <link rel="icon" href="{{ asset('assets/images/'. $favicon->favicon) }}" type="image/x-icon"> <!-- Favicon-->
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}"/>
