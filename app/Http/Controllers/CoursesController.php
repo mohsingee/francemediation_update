@@ -62,12 +62,10 @@ class CoursesController extends Controller
 
         CourseModel::create($submited_data);
 
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Course Successfully Added',
             'status' => true,
-            'msg' => 'Your data added successfully'
-        ];
-
-        return redirect(route('courses.index', $response_date));
+        ));
     }
 
     /**
@@ -133,8 +131,10 @@ class CoursesController extends Controller
             'sub_category' => $request->sub_category,
             'price' => $request->price
         ]);
-
-        return redirect()->route('courses.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Course Successfully Updated',
+            'status' => 'success',
+        ));
     }
 
     /**
@@ -145,13 +145,11 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function delete($id)
-    {
         CourseModel::where('id', $id)->delete();
-        return redirect()->route('courses.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Course Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

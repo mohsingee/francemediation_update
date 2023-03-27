@@ -72,12 +72,10 @@ class EventController extends Controller
 
         EventModel::create($submited_data);
 
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Event Successfully Added',
             'status' => true,
-            'msg' => 'Your data added successfully'
-        ];
-
-        return redirect(route('events.index', $response_date));
+        ));
     }
 
     /**
@@ -162,7 +160,10 @@ class EventController extends Controller
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
         ]);
-        return redirect()->route('events.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Event Successfully Updated',
+            'status' => true,
+        ));
     }
 
     /**
@@ -173,13 +174,11 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function delete($id)
-    {
         EventModel::where('id', $id)->delete();
-        return redirect()->route('events.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Event Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

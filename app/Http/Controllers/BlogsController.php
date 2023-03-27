@@ -72,12 +72,10 @@ class BlogsController extends Controller
 
         Blog::create($submited_data);
 
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Blog Successfully Added',
             'status' => true,
-            'msg' => 'Your data added successfully'
-        ];
-
-        return redirect(route('blogs.index', $response_date));
+        ));
     }
 
     /**
@@ -161,7 +159,10 @@ class BlogsController extends Controller
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
         ]);
-        return redirect()->route('blogs.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Blog Successfully Updated',
+            'status' => true,
+        ));
     }
 
     /**
@@ -172,13 +173,11 @@ class BlogsController extends Controller
      */
 
     public function destroy($id){
-        //
-    }
-
-    public function delete($id)
-    {
         Blog::where('id', $id)->delete();
-        return redirect()->route('blogs.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Blog Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

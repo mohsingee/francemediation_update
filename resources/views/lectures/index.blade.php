@@ -49,7 +49,8 @@
                                             <td>{{ $lecture->duration }}</td>
                                             <td>
                                                 <a href="{{ route('lectures.edit',$lecture->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('lectures.destroy',$lecture->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="/admin/lectures"
+                                                data-id="{{ $lecture->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

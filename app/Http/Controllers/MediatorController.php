@@ -56,7 +56,10 @@ class MediatorController extends Controller
     public function destroy(Mediator_submissions $mediator_submissions, $id)
     {
         $card = Mediator_submissions::where('id', $id)->delete();
-        return redirect()->route('mediator.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Mediator user Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)
@@ -121,6 +124,9 @@ class MediatorController extends Controller
             'appeal_court'=>$request->appeal_court,         
         ]);
 
-        return redirect()->route('mediator.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Mediator user Successfully Updated',
+            'status' => true,
+        ));
     }
 }

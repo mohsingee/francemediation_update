@@ -46,7 +46,8 @@
                                             <td>{{ $blog->author }}</td>
                                             <td>
                                                 <a href="{{ route('blogs.edit',$blog->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('blogs.destroy',$blog->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="blogs"
+                                                    data-id="{{ $blog->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

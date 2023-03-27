@@ -28,6 +28,7 @@
                         <div class="body">
                             <form action="{{ route('lectures.update',$lecture->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('put')
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -59,11 +60,22 @@
                                             <input type="text" class="form-control" value="{{ $lecture->vimeo_link }}" name="vimeo_link" placeholder="Vimeo link..." />                                   
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    @php if(empty($lecture->file)){
+                                        $col = "col-sm-6";
+                                    }else{
+                                        $col = "col-sm-4";
+                                    }
+                                    @endphp
+                                    <div class="{{ $col }}">
                                         <div class="form-group">                                   
                                             <input type="file" class="form-control" name="file"/>                                    
                                         </div>
                                     </div>
+                                    @if($col =="col-sm-4")
+                                    <div class="col-sm-2">
+                                        <img src="{{ asset('assets/courses/lectures/'.$lecture->file) }}" alt="" width="80">
+                                    </div>
+                                    @endif
                                 </div>                 
                                 <div class="row clearfix">
                                     <div class="col-sm-12 text-right">

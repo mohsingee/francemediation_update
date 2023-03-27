@@ -28,6 +28,7 @@
                         <div class="body">
                             <form action="{{ route('instructor.update',$instructor->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('put')
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">                                    
@@ -48,7 +49,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">                                   
-                                            <input type="password" class="form-control" name="password" placeholder="Password..."/>                                    
+                                            <input type="password" class="form-control" name="password" value="{{ $instructor->password }}" placeholder="Password..."/>                                    
                                         </div>
                                     </div>
                                 </div>
@@ -72,10 +73,9 @@
                                     </div>
                                     <div class="col-sm-6">                             
                                           <select id="gender" name="gender" class="form-control show-tick ms select2" data-placeholder="Select Gender">
-                                            <option selected disabled>Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="other">Other</option>
+                                            <option value="male" @if($instructor->gender == 'male') selected @endif>Male</option>
+                                            <option value="female" @if($instructor->gender == 'female') selected @endif>Female</option>
+                                            <option value="other" @if($instructor->gender == 'other') selected @endif>Other</option>
                                           </select>                                   
                                     </div>
                                 </div>
@@ -85,10 +85,13 @@
                                             <input type="text" class="form-control" value="{{ $instructor->profession_title }}" name="profession_title" placeholder="Profession title..." />                                   
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">                             
+                                    <div class="col-sm-4">                             
                                       <div class="form-group">                                    
                                         <input type="file" class="form-control" name="profile" placeholder="Profile Image..." />                                   
                                       </div>                                   
+                                    </div>
+                                    <div class="col-sm-2">                             
+                                      <img src="{{ asset('assets/instructor/'.$instructor->profile) }}" alt="" width="70">                                   
                                     </div>
                                 </div>
                                 <div class="row clearfix">

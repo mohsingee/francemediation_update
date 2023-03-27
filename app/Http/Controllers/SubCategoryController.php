@@ -55,12 +55,10 @@ class SubCategoryController extends Controller
 
         SubCategory::create($submited_data);
 
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Sub Category Successfully Added',
             'status' => true,
-            'msg' => 'Your data added successfully'
-        ];
-
-        return redirect(route('sub_categories.index', $response_date));
+        ));
     }
 
     /**
@@ -117,7 +115,10 @@ class SubCategoryController extends Controller
             'title' => $request->title,
             'image' => $img
         ]);
-        return redirect()->route('sub_categories.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Sub Category Successfully Updated',
+            'status' => 'success',
+        ));
     }
 
     /**
@@ -128,13 +129,11 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function delete($id)
-    {
         SubCategory::where('id', $id)->delete();
-        return redirect()->route('sub_categories.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Sub Category Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

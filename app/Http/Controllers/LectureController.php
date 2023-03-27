@@ -62,7 +62,10 @@ class LectureController extends Controller
             'vimeo_link'=>$request->vimeo_link,
             'file'=>$file_name,
         ]);
-        return redirect()->route('lectures.show',$request->course_id)->with('success','Lecture save successfully.');
+        return response()->json(array(
+            'message' => 'Lecture Successfully Added',
+            'status' => true,
+        ));
     }
 
     /**
@@ -122,7 +125,10 @@ class LectureController extends Controller
             'vimeo_link'=>$request->vimeo_link,
             'file'=>$file_name,
         ]);
-        return redirect()->route('lectures.show',$request->course_id)->with('success','Lecture updated successfully.');
+        return response()->json(array(
+            'message' => 'Lecture Successfully Updated',
+            'status' => 'success',
+        ));
     }
 
     /**
@@ -133,12 +139,11 @@ class LectureController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function delete($id){
         Lecture::where('id', $id)->delete();
-        return redirect()->route('lectures.show',$id)->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Lecture Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

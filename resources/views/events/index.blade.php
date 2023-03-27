@@ -46,7 +46,8 @@
                                             <td>{{ $event->event_date }}</td>
                                             <td>
                                                 <a href="{{ route('events.edit',$event->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('events.destroy',$event->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="events"
+                                                data-id="{{ $event->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

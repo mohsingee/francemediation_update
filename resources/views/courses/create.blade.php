@@ -31,7 +31,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                       <div class="form-group">   
-                                        <select name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Instructor">
+                                        <select name="instructor" class="form-control show-tick ms select2" data-placeholder="Select Instructor">
                                           <option selected disabled>Select Instructor</option>
                                           @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->first_name.' '.$user->last_name }}</option>

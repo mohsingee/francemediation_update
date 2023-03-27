@@ -59,12 +59,10 @@ class InstructorController extends Controller
 
         Instructor::create($submited_data);
 
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Instructor Successfully Added',
             'status' => true,
-            'msg' => 'Your data added successfully'
-        ];
-
-        return redirect(route('instructor.index', $response_date));
+        ));
     }
 
     /**
@@ -99,7 +97,50 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required',
+            'password' => 'required',
+            'profile' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $instructor = Instructor::where('id',$id)->first();
+        if($request->profile){
+            $isExists = File::exists('assets/instructor/'.$instructor->profile);
+            if ($isExists == true) {
+                File::delete(public_path('assets/instructor/' . $instructor->profile));
+            }
+            $profile = time() . rand(1, 99999). "." . $request->profile->getClientOriginalExtension();
+            $request->profile->move(public_path('assets/instructor/'),$profile);
+        }else{
+            $profile = $instructor->profile;
+        }
+        Instructor::where('id',$id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'profession_title' => $request->profession_title,
+            'area_code' => $request->area_code,
+            'profile' => $profile,
+            'phone_number' => $request->phone_number,
+            'postal_code' => $request->postal_code,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'pinterest' => $request->pinterest,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'about_instructor' => $request->about_instructor,
+        ]);
+        return response()->json(array(
+            'message' => 'Instructor Successfully Updated',
+            'status' => true,
+        ));
     }
 
     /**
@@ -110,13 +151,11 @@ class InstructorController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function delete($id)
-    {
         Instructor::where('id', $id)->delete();
-        return redirect()->route('instructor.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Instructor Successfully Deleted',
+            'status' => true,
+        ));
     }
 
     public function deleteAll(Request $request)

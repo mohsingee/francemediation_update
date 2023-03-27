@@ -53,7 +53,10 @@ class FormationController extends Controller
     public function destroy(Training_submissions $training_submissions, $id)
     {
         $card = Training_submissions::where('id', $id)->delete();
-        return redirect()->route('formation.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Formation user Successfully Deleted',
+            'status' => true,
+        ));
     }
     public function deleteAll(Request $request)
     {
@@ -116,12 +119,9 @@ class FormationController extends Controller
         
         Training_submissions::where('id', $id)->update($submited_data);
         $submited_data['id'] = $id;
-        $response_date = [
+        return response()->json(array(
+            'message' => 'Formation user Successfully Updated',
             'status' => true,
-            'msg' => 'Your data updated successfully',
-            'user' => (object)$submited_data
-        ];
-
-        return back();
+        ));
     }
 }

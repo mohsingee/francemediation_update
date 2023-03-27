@@ -28,6 +28,7 @@
                         <div class="body">
                             <form action="{{ route('events.update',$event->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('put')
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">                                    

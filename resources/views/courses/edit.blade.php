@@ -28,10 +28,11 @@
                         <div class="body">
                             <form action="{{ route('courses.update',$course->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('put')
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                       <div class="form-group">   
-                                        <select name="category_id" class="form-control show-tick ms select2" data-placeholder="Select Instructor">
+                                        <select name="instructor" class="form-control show-tick ms select2" data-placeholder="Select Instructor">
                                           <option selected disabled>Select Instructor</option>
                                           @foreach($users as $user)
                                             <option value="{{ $user->id }}" @if($course->instructor == $user->id) selected @endif>{{ $user->first_name.' '.$user->last_name }}</option>

@@ -55,7 +55,8 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('sub_categories.edit',$sub_cate->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('sub_categories.destroy',$sub_cate->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="sub_categories"
+                                                data-id="{{ $sub_cate->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

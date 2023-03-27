@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content')
+@section('css')
+<style>
+    .bg-color{
+        background-color:#c2c4c5;
+    }
+</style>
+@endsection
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
@@ -55,14 +62,46 @@
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
-                        <img src="{{ asset('assets/courses/'.$course->image) }}" class="card-img-top"/>
-                        <div class="card-body">
-                            <div class="text-center">
-                                <h5 class="card-title text-center"><b>${{ $course->price }}</b></h5>
-                                <button class="btn btn-md btn-danger">Enroll</button>
+                        <div class="blogitem mb-5">
+                            <div class="blogitem-image">
+                                <img src="{{ asset('assets/courses/'.$course->image) }}" alt="blog image">
                             </div>
-                            <h5 class="card-title">{{ $course->title }}</h5>
+                            <div class="blogitem-content">
+                                <div class="blogitem-header">
+                                    <div class="blogitem-meta">
+                                        <span><i class="zmdi zmdi-account"></i>By {{ $course->instruct->first_name }}</span>
+                                        <span><i class="zmdi zmdi-money"></i>{{ $course->price }}</span>
+                                    </div>
+                                </div>
+                                <h5>{{ $course->title }}</h5>
+                            </div>
+                            <button class="btn btn-md btn-danger text-center">Enroll</button>
                         </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr class="bg-secondary text-white">
+                                <th>{{ $course->title }}</th>
+                                <th>{{ count($course->lectures) }} Lectures</th>
+                                <th>Duration</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($course->lectures as $lec)
+                                <tr>
+                                    @if(empty($lec->file))
+                                    <td colspan="2"><i class="zmdi zmdi-videocam"></i> {{ $lec->title }}</td>
+                                    <td>{{ $lec->duration }}</td>
+                                    @else
+                                    <td colspan="2"><i class="zmdi zmdi-file"></i> {{ $lec->title }}</td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

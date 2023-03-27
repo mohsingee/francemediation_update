@@ -70,8 +70,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');
     Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
-    Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
-    Route::get('/user/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
+    Route::put('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
     Route::delete('/user/deleteAllUser', [App\Http\Controllers\UserController::class, 'deleteAllUser'])->name('user.delete-all');
     Route::get('/user/status/{id}/{status}', [App\Http\Controllers\UserController::class, 'status'])->name('user.status');
 
@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/formation/edit/{id}', [App\Http\Controllers\FormationController::class, 'edit'])->name('formation.edit');
     Route::get('/formation/show/{id}', [App\Http\Controllers\FormationController::class, 'show'])->name('formation.show');
     Route::put('/formation/update/{id}', [App\Http\Controllers\FormationController::class, 'update'])->name('formation.update');
-    Route::get('/formation/destroy/{id}', [App\Http\Controllers\FormationController::class, 'destroy'])->name('formation.destroy');
+    Route::delete('/formation/destroy/{id}', [App\Http\Controllers\FormationController::class, 'destroy'])->name('formation.destroy');
     Route::delete('/formation/deleteAll', [App\Http\Controllers\FormationController::class, 'deleteAll'])->name('formation.delete-all');
     Route::get('/formation/status/{id}/{status}', [App\Http\Controllers\FormationController::class, 'status'])->name('formation.status');
 
@@ -87,7 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/mediator/edit/{id}', [App\Http\Controllers\MediatorController::class, 'edit'])->name('mediator.edit');
     Route::get('/mediator/show/{id}', [App\Http\Controllers\MediatorController::class, 'show'])->name('mediator.show');
     Route::put('/mediator/update/{id}', [App\Http\Controllers\MediatorController::class, 'update'])->name('mediator.update');
-    Route::get('/mediator/destroy/{id}', [App\Http\Controllers\MediatorController::class, 'destroy'])->name('mediator.destroy');
+    Route::delete('/mediator/destroy/{id}', [App\Http\Controllers\MediatorController::class, 'destroy'])->name('mediator.destroy');
     Route::delete('/mediator/deleteAll', [App\Http\Controllers\MediatorController::class, 'deleteAll'])->name('mediator.delete-all');
     Route::get('/mediator/status/{id}/{status}', [App\Http\Controllers\MediatorController::class, 'status'])->name('mediator.status');
 
@@ -111,20 +111,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/settings/create', [App\Http\Controllers\SettingController::class, 'create'])->name('setting.create');
     Route::post('/settings/store', [App\Http\Controllers\SettingController::class, 'store'])->name('setting.store');
     Route::get('/settings/edit/{id}', [App\Http\Controllers\SettingController::class, 'edit'])->name('setting.edit');
-    Route::post('/settings/update/{id}', [App\Http\Controllers\SettingController::class, 'update'])->name('setting.update');
+    Route::put('/settings/update/{id}', [App\Http\Controllers\SettingController::class, 'update'])->name('setting.update');
     Route::get('/settings/destroy/{id}', [App\Http\Controllers\SettingController::class, 'destroy'])->name('setting.destroy');
 
     Route::resource('blogs', BlogsController::class);
-    Route::get('blogs/delete/{id}', [BlogsController::class, 'delete'])->name('blogs.delete');
     Route::post('/blogs/deleteAll', [BlogsController::class, 'deleteAll'])->name('blogs.delete-all');
 
     Route::resource('courses', CoursesController::class);
-    Route::get('courses/delete/{id}', [CoursesController::class, 'delete'])->name('courses.delete');
     Route::post('/courses/deleteAll', [CoursesController::class, 'deleteAll'])->name('courses.delete-all');
     Route::get('get-sub-category/{id}', [CoursesController::class, 'getSubCategory'])->name('get-sub-category');
 
     Route::resource('instructor', InstructorController::class);
-    Route::get('instructor/delete/{id}', [InstructorController::class, 'delete'])->name('instructor.delete');
     Route::post('/instructor/deleteAll', [InstructorController::class, 'deleteAll'])->name('instructor.delete-all');
    
     Route::resource('students', StudentController::class);
@@ -132,20 +129,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/students/deleteAll', [StudentController::class, 'deleteAll'])->name('students.delete-all');
     
     Route::resource('events', EventController::class);
-    Route::get('events/delete/{id}', [EventController::class, 'delete'])->name('events.delete');
     Route::post('/events/deleteAll', [EventController::class, 'deleteAll'])->name('events.delete-all');
     
     Route::resource('categories', CategoryController::class);
-    Route::get('categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
     Route::post('/categories/deleteAll', [CategoryController::class, 'deleteAll'])->name('categories.delete-all');
     
     Route::resource('sub_categories', SubCategoryController::class);
-    Route::get('sub_categories/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub_categories.delete');
     Route::post('/sub_categories/deleteAll', [SubCategoryController::class, 'deleteAll'])->name('sub_categories.delete-all');
     
     Route::resource('lectures', LectureController::class);
     Route::get('lectures/add/{id}', [LectureController::class, 'add'])->name('lectures.add');
-    Route::get('lectures/delete/{id}', [LectureController::class, 'delete'])->name('lectures.delete');
     Route::post('/lectures/deleteAll', [LectureController::class, 'deleteAll'])->name('lectures.delete-all');
 });
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {

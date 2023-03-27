@@ -6,6 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 <title>{{ config('app.name', 'France Mediation') }}</title>
@@ -15,6 +16,7 @@
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/charts-c3/plugin.css') }}"/>
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/morrisjs/morris.min.css') }}" />
+<link class="js-stylesheet" href="{{ asset('sweetalert/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{ asset('assets/admin/css/style.min.css') }}">
 <style>

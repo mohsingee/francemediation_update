@@ -71,11 +71,13 @@
                                         <img src="{{ asset('assets/images/' . $user->image) }}" alt="" width="80">
                                     </div>
                                     @endif
+                                    @if($user->id=='')
                                     <div class="col-sm-6">
                                         <div class="form-group">                                   
                                             <input type="password" name="password" class="form-control" placeholder="Password..." />                                    
                                         </div>
                                     </div>
+                                    @endif
                                 </div>            
                                 <div class="row clearfix">
                                     <div class="col-sm-12 text-right">

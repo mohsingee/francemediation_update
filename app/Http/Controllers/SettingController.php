@@ -71,7 +71,10 @@ class SettingController extends Controller
         $settings->footer_text = $request->footer_text;
         $settings->save();
 
-        return redirect()->route('setting.index')->with('success', '<i class="icon-tick"></i><strong>Well done!</strong>, Success');
+        return response()->json(array(
+            'message' => 'Setting Successfully Added',
+            'status' => true,
+        ));
     }
 
     /**
@@ -140,7 +143,10 @@ class SettingController extends Controller
         $settings->footer_text = $request->footer_text;
         $settings->save();
 
-        return redirect()->route('setting.index')->with('error', '<i class="icon-warning2"></i>Oh snap!, You can not edit this in demo version.');
+        return response()->json(array(
+            'message' => 'Setting Successfully Updated',
+            'status' => true,
+        ));
         }
     }
 

@@ -59,7 +59,8 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('user.edit',$user->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('user.destroy',$user->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="user/destroy"
+                                                data-id="{{ $user->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

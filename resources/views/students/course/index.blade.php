@@ -53,8 +53,6 @@ hr {
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-label" for="exampleFormControlTextarea1">Select Sub Category</label>

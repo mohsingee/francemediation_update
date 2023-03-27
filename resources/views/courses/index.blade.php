@@ -46,7 +46,8 @@
                                             <td>{{ $course->price }}</td>
                                             <td>
                                                 <a href="{{ route('courses.edit',$course->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
-                                                <a href="{{ route('courses.destroy',$course->id) }}"><i class="zmdi zmdi-hc-fw"></i></a>
+                                                <a href="javascript:void(0)" class="delete_btn" data-url="courses"
+                                                data-id="{{ $course->id }}"><i class="zmdi zmdi-hc-fw"></i></a>
                                                 <a href="{{ route('lectures.add',$course->id) }}" class="btn btn-sm btn-info">Add Lecture</a>
                                                 <a href="{{ route('lectures.show',$course->id) }}" class="btn btn-sm btn-primary">View Lectures</a>
                                             </td>
