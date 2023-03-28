@@ -19,6 +19,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\UserCourseController;
+use App\Http\Controllers\EnrollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -140,6 +141,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('lectures', LectureController::class);
     Route::get('lectures/add/{id}', [LectureController::class, 'add'])->name('lectures.add');
     Route::post('/lectures/deleteAll', [LectureController::class, 'deleteAll'])->name('lectures.delete-all');
+
+    Route::get('enroll-course/index/{id}', [EnrollController::class, 'index'])->name('enroll-course.index');
+    Route::get('enroll-course/show/{id}', [EnrollController::class, 'show'])->name('enroll-course.show');
 });
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::resource('user-course', UserCourseController::class);

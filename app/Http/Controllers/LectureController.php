@@ -54,11 +54,16 @@ class LectureController extends Controller
         }else{
             $file_name= null;
         }
+        if($request->youtube_link){
+            $link = $this->convertYoutube($request->youtube_link);
+        }else{
+            $link = null;
+        }
         Lecture::create([
             'course_id'=>$request->course_id,
             'title'=>$request->title,
             'duration'=>$request->duration,
-            'youtube_link'=>$request->youtube_link,
+            'youtube_link'=>$link,
             'vimeo_link'=>$request->vimeo_link,
             'file'=>$file_name,
         ]);
@@ -67,6 +72,14 @@ class LectureController extends Controller
             'status' => true,
         ));
     }
+
+    function convertYoutube($string) {
+        return preg_replace(
+            "/[a-zA-Z\/\/:\.]*youtu(?:be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)(?:[&?\/]t=)?(\d*)(?:[a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
+            "https://www.youtube.com/embed/$1?start=$2",
+            $string
+        );
+    }  
 
     /**
      * Display the specified resource.

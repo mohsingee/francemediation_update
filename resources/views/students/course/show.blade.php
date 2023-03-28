@@ -75,7 +75,7 @@
                                 </div>
                                 <h5>{{ $course->title }}</h5>
                             </div>
-                            <button class="btn btn-md btn-danger text-center">Enroll</button>
+                            <a href="{{ route('enroll-course.index',$course->id) }}" class="btn btn-md btn-danger text-center">Enroll</a>
                         </div>
                     </div>
                 </div>
