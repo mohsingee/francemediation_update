@@ -18,6 +18,7 @@
 <script src="{{ asset('assets/admin/bundles/mainscripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/admin/js/pages/index.js') }}"></script>
 <script src="{{ asset('sweetalert/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/duration-picker.js') }}"></script>
 <script>
 $("form").on('submit',function(e) {
     "use strict";

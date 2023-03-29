@@ -68,7 +68,9 @@
                                 src="{{ $tutorial->youtube_link }}">
                             </iframe>
                             @else
-                                Vimeo
+                            <iframe width="600" height="315"
+                                src="{{ $tutorial->vimeo_link }}">
+                            </iframe>
                             @endif
                         </div>
                     </div>

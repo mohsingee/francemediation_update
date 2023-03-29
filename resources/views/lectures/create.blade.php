@@ -44,7 +44,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">                                    
-                                            <input type="date" class="form-control html-duration-picker" name="duration" placeholder="Duration..." />                                   
+                                            <input type="text" class="form-control html-duration-picker" name="duration" placeholder="Duration..." />                                   
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

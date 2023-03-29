@@ -37,17 +37,17 @@
                             </thead>
                             <tbody>
                                 @foreach($course->lectures as $lecture)
-                                <tr>
+                                <tr @if($tutorial->id == $lecture->id) class="bg-success text-white" @endif>
                                     @if(empty($lecture->file))
                                         <td>
-                                            <a href="{{ route('enroll-course.show',$lecture->id) }}">
+                                            <a @if($tutorial->id == $lecture->id) class="text-white" @endif href="{{ route('enroll-course.show',$lecture->id) }}">
                                                 <i class="zmdi zmdi-videocam"></i> {{ $lecture->title }}
                                             </a>
                                         </td>
                                         <td>{{ $lecture->duration }}</td>
                                     @else
                                         <td colspan="2">
-                                            <a href="{{ route('enroll-course.show',$lecture->id) }}">
+                                            <a @if($tutorial->id == $lecture->id) class="text-white" @endif href="{{ route('enroll-course.show',$lecture->id) }}">
                                                 <i class="zmdi zmdi-file"></i> {{ $lecture->title }}
                                             </a>
                                         </td>
@@ -65,11 +65,11 @@
                             <h1>this is file</h1>
                             @elseif($tutorial->youtube_link)
                             <iframe width="600" height="315"
-                                src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                                src="{{ $tutorial->youtube_link }}">
                             </iframe>
                             @else
                             <iframe width="600" height="315"
-                                src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                                src="{{ $tutorial->vimeo_link }}">
                             </iframe>
                             @endif
                         </div>

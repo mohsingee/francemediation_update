@@ -50,7 +50,9 @@ class UserCourseController extends Controller
      */
     public function show($id)
     {
-        $course = CourseModel::where('id',$id)->first();
+        $course = CourseModel::where('id',$id)->with(['lectures' => function ($query){
+            $query->orderBy('id','DESC');
+        }])->first();
         return view('students.course.show',compact('course'));
     }
 

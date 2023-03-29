@@ -59,12 +59,19 @@ class LectureController extends Controller
         }else{
             $link = null;
         }
+        if($request->vimeo_link){
+            $vimeo_url = 'https://player.vimeo.com/video/';
+            $v = substr( strrchr(  $request->vimeo_link, '/' ), 1 );
+            $vlink = $vimeo_url . $v;
+        }else{
+            $vlink = null;
+        }
         Lecture::create([
             'course_id'=>$request->course_id,
             'title'=>$request->title,
             'duration'=>$request->duration,
             'youtube_link'=>$link,
-            'vimeo_link'=>$request->vimeo_link,
+            'vimeo_link'=>$vlink,
             'file'=>$file_name,
         ]);
         return response()->json(array(
@@ -131,11 +138,23 @@ class LectureController extends Controller
                 $file_name =null;
             }
         }
+        if($request->youtube_link){
+            $link = $this->convertYoutube($request->youtube_link);
+        }else{
+            $link = null;
+        }
+        if($request->vimeo_link){
+            $vimeo_url = 'https://player.vimeo.com/video/';
+            $v = substr( strrchr(  $request->vimeo_link, '/' ), 1 );
+            $vlink = $vimeo_url . $v;
+        }else{
+            $vlink = null;
+        }
         Lecture::where('id',$id)->update([
             'title'=>$request->title,
             'duration'=>$request->duration,
-            'youtube_link'=>$request->youtube_link,
-            'vimeo_link'=>$request->vimeo_link,
+            'youtube_link'=>$link,
+            'vimeo_link'=>$vlink,
             'file'=>$file_name,
         ]);
         return response()->json(array(

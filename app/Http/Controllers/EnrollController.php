@@ -13,12 +13,17 @@ class EnrollController extends Controller
         $course = CourseModel::where('id',$id)->with(['lectures' => function ($query){
             $query->orderBy('id','DESC');
         }])->first();
-        $tutorial = Lecture::orderBy('id','DESC')->where('status',0)->first();
+        $tutorial = Lecture::where(['course_id'=>$id,'selected'=>1])->first();
+        if(empty($tutorial)){
+            $tutorial = Lecture::where(['course_id'=>$id,'selected'=>0])->orderBy('id','DESC')->first();
+        }
         return view('students/enroll/index',compact('course','tutorial'));
     }
     
     public function show($id){
         $tutorial = Lecture::where('id',$id)->first();
+        Lecture::where('course_id',$tutorial->course_id)->update(['selected'=>0]);
+        Lecture::where('id',$id)->update(['selected'=>1]);
         $course = CourseModel::where('id',$tutorial->course_id)->with(['lectures' => function ($query){
             $query->orderBy('id','DESC');
         }])->first();
